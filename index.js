@@ -18,3 +18,12 @@ app.listen(app.get('port'), function() {
 });
 
 
+var Twitter = require('twitter');
+
+var clint = new Twitter({
+  consumer_key: 'ncjKabjKKdcmnKkTyA0irhjIG',
+  consumer_secret: '63XT0n4AdCcad3v3g37fHwelbbekHERNFVgC5GJm7HWQJoXvg4',
+  access_token_key: '',
+  access_token_secret: ''
+});
+
