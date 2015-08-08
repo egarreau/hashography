@@ -1,0 +1,24 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/*NAVBAR*/
+.nav-wrapper {
+  background-color: #001A5B;
+}
+
+a.brand-logo.center {
+  color: #CBD7A2;
+}
+
+/*FOOTER*/
+footer.page-footer {
+  background-color: #001A5B;
+  color: #CBD7A2;
+}
