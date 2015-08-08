@@ -4,6 +4,7 @@ body {
   flex-direction: column;
   background-color: #001A5B;
   color: #CBD7A2;
+  /*background: url(../images/sample_map.png);*/
 }
 
 main {
@@ -27,8 +28,13 @@ main {
 .pipe {
   color: #CBD7A2;
 }
+footer.page-footer {
+  margin-top: -10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 footer.page-footer, a {
-  color: #448C64;
+  color: #EB7600;
   background-color: #001A5B;
 }
 
@@ -36,15 +42,14 @@ footer.page-footer, a {
 #textarea1.materialize-textarea {
   font-size: 20px;
   padding: 0px;
+  font-family: Roboto;
+}
+li {
+  margin-right: 20%;
+  padding-right: 10%;
 }
 
 /*MAP*/
-.map {
-  border-style: solid;
-  border-color: #CBD7A2;
-  border-width: small;
-}
 .sample-map {
-  max-width: 100%;
-  max-height: 100%;
+
 }
