@@ -31,7 +31,7 @@ var client = new Twitter({
 var streamData = function(searchTerm){
   client.stream('statuses/filter', {track: searchTerm}, function(stream){
     stream.on('data', function(tweet) {
-      console.log("Text: " + tweet.text);
+      // console.log("Text: " + tweet.text);
 
       if (tweet.coordinates === null || tweet.coordinates === undefined) {
         if (tweet.place === null){
