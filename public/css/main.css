@@ -41,15 +41,21 @@ footer.page-footer, a {
 /*TEXTAREA*/
 #textarea1.materialize-textarea {
   font-size: 20px;
-  padding: 0px;
+  padding: 5px;
   font-family: Roboto;
+  color: #EB7600;
+}
+label {
+  font-family: Roboto;
+  margin-left: 20px;
+  letter-spacing: 1px;
+}
+label.active {
+  display: none;
 }
 li {
-  margin-right: 20%;
-  padding-right: 10%;
+  margin-left: -100%;
 }
-
-/*MAP*/
-.sample-map {
-
+row.wordentry {
+  box-shadow: 0;
 }
