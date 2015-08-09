@@ -50,7 +50,14 @@ $(document).ready(function(){
       makeMarker(data.coordinates, map, data.tweet);
     });
 
-    socket.emit('search', {word: 'cat'})
+    $("#search-form").on('submit', function(event){
+      event.preventDefault();
+      var searchWord = $('#textarea1').val();
+      socket.emit('search', { word: searchWord });
+      $('#textarea1').val('');
+    })
+
+    // socket.emit('search', {word: 'cat'})
 
     socket.on('geocoder', function(data){
       var address = data.location
@@ -62,6 +69,7 @@ $(document).ready(function(){
       setTimeout(geocoding(address, map, data.tweet), 500);
       };
     });
+
 
 })
 
