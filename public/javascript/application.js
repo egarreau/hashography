@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:5000');
+var socket = io.connect(window.location.hostname);
 var geocoder = new google.maps.Geocoder();
 
 function makeMarker(coordinateArray, map, tweet){
@@ -39,7 +39,7 @@ var geocoding = function(address, map, tweet) {
 
 
 $(document).ready(function(){
-
+    // socket.emit('reset')
     var mapOptions = {
       center: { lat: 20, lng: 0},
       zoom: 3
