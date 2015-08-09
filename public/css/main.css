@@ -67,3 +67,9 @@ li {
   width: 150%;
   height: 0px;
 }
+
+/*MAP*/
+#map-canvas {
+  width: 700px;
+  height: 700px;
+}
