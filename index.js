@@ -18,12 +18,21 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+function findBoxCenter(box){
+  point1 = box[0]
+  point2 = box[1]
+  point3 = box[2]
+  midX = (point1[1] + point2[1]) / 2
+  midY = (point1[0] + point3[0]) / 2
+  // makeMarker(midX, midY, map)
+  return [midX, midY]
+}
 
 io.on('connection', function(socket){
   socket.on('search', function(data){
     client.stream('statuses/filter', {track: data.word}, function(stream){
       stream.on('data', function(tweet) {
-        console.log("Text: " + tweet.text);
+        // console.log("Text: " + tweet.text);
 
         if (tweet.coordinates === null || tweet.coordinates === undefined) {
           if (tweet.place === null){
@@ -31,7 +40,9 @@ io.on('connection', function(socket){
           }
           else{
             // send tweet.place.bounding_box.coordinates to client
-            socket.emit('tweet', {coordinates: tweet.place.bounding_box.coordinates});
+            midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
+            console.log(midPoint);
+            socket.emit('tweet', {coordinates: midPoint});
           };
         }
         else{
