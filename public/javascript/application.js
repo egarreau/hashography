@@ -6,7 +6,9 @@ function makeMarker(coordinateArray, map, tweet){
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map
   })
-
+//The following code was written by "Engineer", from StackOverflow. In June 19th 2012,
+//"Engineer" decided to make a post to help people like me use Google Map API to help
+//us display multiple infoboxes. Thank you Engineer!
   var content = tweet;
 
   var infowindow = new google.maps.InfoWindow()
