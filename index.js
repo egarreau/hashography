@@ -43,7 +43,7 @@ io.on('connection', function(socket){
 
         if (tweet.coordinates === null || tweet.coordinates === undefined) {
           if (tweet.place === null){
-            // parse tweet.user.location
+            socket.emit('geocoder', { location: tweet.user.location });
           }
           else{
             midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
