@@ -43,15 +43,15 @@ io.on('connection', function(socket){
 
         if (tweet.coordinates === null || tweet.coordinates === undefined) {
           if (tweet.place === null){
-            socket.emit('geocoder', { location: tweet.user.location });
+            socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text });
           }
           else{
             midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-            socket.emit('tweet', {coordinates: midPoint});
+            socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text });
           };
         }
         else{
-          socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
+          socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text });
         };
       });
     });
