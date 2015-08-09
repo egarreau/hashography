@@ -20,10 +20,10 @@ app.get('/', function(request, response) {
 
 
 var client = new twitter({
-  consumer_key: 'ncjKabjKKdcmnKkTyA0irhjIG',
-  consumer_secret: '63XT0n4AdCcad3v3g37fHwelbbekHERNFVgC5GJm7HWQJoXvg4',
-  access_token_key: '127879897-dSW0TRtfjE0eWYHyf0VHtH6UDNDFRCX1G8afJETN',
-  access_token_secret: 'Rej1phiRJzAi62ah6c2hrSPmlTQczzhY2ctwoP1ckmMfh'
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token_key: process.env.ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
 
