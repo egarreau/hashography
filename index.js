@@ -18,42 +18,6 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-function findBoxCenter(box){
-  point1 = box[0]
-  point2 = box[1]
-  point3 = box[2]
-  midX = (point1[1] + point2[1]) / 2
-  midY = (point1[0] + point3[0]) / 2
-  // makeMarker(midX, midY, map)
-  return [midX, midY]
-}
-
-io.on('connection', function(socket){
-  socket.on('search', function(data){
-    client.stream('statuses/filter', {track: data.word}, function(stream){
-      stream.on('data', function(tweet) {
-        // console.log("Text: " + tweet.text);
-
-        if (tweet.coordinates === null || tweet.coordinates === undefined) {
-          if (tweet.place === null){
-            // parse tweet.user.location
-          }
-          else{
-            // send tweet.place.bounding_box.coordinates to client
-            midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-            console.log(midPoint);
-            socket.emit('tweet', {coordinates: midPoint});
-          };
-        }
-        else{
-          // send tweet.coordinates.coordinates to client
-          socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
-        };
-      });
-    });
-  });
-});
-
 
 var client = new twitter({
   consumer_key: 'ncjKabjKKdcmnKkTyA0irhjIG',
@@ -62,25 +26,36 @@ var client = new twitter({
   access_token_secret: 'Rej1phiRJzAi62ah6c2hrSPmlTQczzhY2ctwoP1ckmMfh'
 });
 
-// var streamData = function(searchTerm){
-//   client.stream('statuses/filter', {track: searchTerm}, function(stream){
-//     stream.on('data', function(tweet) {
-//       console.log("Text: " + tweet.text);
-//       if (tweet.coordinates === null || tweet.coordinates === undefined) {
-//         if (tweet.place === null){
-//           // parse tweet.user.location using CSV matching
-//         }
-//         else{
-//           // send tweet.place.bounding_box.coordinates to map
-//           socket.emit('tweet', {coordinates: tweet.place.bounding_box.coordinates});
-//         };
-//       }
-//       else{
-//         // send tweet.coordinates.coordinates to map
-//         socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
-//       };
-//     });
-//   });
-// };
 
-// streamData("car");
+function findBoxCenter(box){
+  point1 = box[0]
+  point2 = box[1]
+  point3 = box[2]
+  midX = (point1[1] + point2[1]) / 2
+  midY = (point1[0] + point3[0]) / 2
+  return [midX, midY]
+}
+
+io.on('connection', function(socket){
+  socket.on('search', function(data){
+    client.stream('statuses/filter', {track: data.word}, function(stream){
+      stream.on('data', function(tweet) {
+
+        if (tweet.coordinates === null || tweet.coordinates === undefined) {
+          if (tweet.place === null){
+            // parse tweet.user.location
+          }
+          else{
+            midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
+            socket.emit('tweet', {coordinates: midPoint});
+          };
+        }
+        else{
+          socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
+        };
+      });
+    });
+  });
+});
+
+
