@@ -22,3 +22,8 @@ footer.page-footer {
   background-color: #001A5B;
   color: #CBD7A2;
 }
+
+#map-canvas {
+  width: 700px;
+  height: 700px;
+}

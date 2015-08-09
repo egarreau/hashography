@@ -20,7 +20,6 @@ app.get('/', function(request, response) {
 
 
 io.on('connection', function(socket){
-  // socket.emit("news", {hello: "world"});
   socket.on('search', function(data){
     client.stream('statuses/filter', {track: data.word}, function(stream){
       stream.on('data', function(tweet) {
@@ -52,26 +51,26 @@ var client = new twitter({
   access_token_secret: 'Rej1phiRJzAi62ah6c2hrSPmlTQczzhY2ctwoP1ckmMfh'
 });
 
-var streamData = function(searchTerm){
-  client.stream('statuses/filter', {track: searchTerm}, function(stream){
-    stream.on('data', function(tweet) {
-      console.log("Text: " + tweet.text);
+// var streamData = function(searchTerm){
+//   client.stream('statuses/filter', {track: searchTerm}, function(stream){
+//     stream.on('data', function(tweet) {
+//       console.log("Text: " + tweet.text);
 
-      if (tweet.coordinates === null || tweet.coordinates === undefined) {
-        if (tweet.place === null){
-          // parse tweet.user.location using CSV matching
-        }
-        else{
-          // send tweet.place.bounding_box.coordinates to map
-          socket.emit('tweet', {coordinates: tweet.place.bounding_box.coordinates});
-        };
-      }
-      else{
-        // send tweet.coordinates.coordinates to map
-        socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
-      };
-    });
-  });
-};
+//       if (tweet.coordinates === null || tweet.coordinates === undefined) {
+//         if (tweet.place === null){
+//           // parse tweet.user.location using CSV matching
+//         }
+//         else{
+//           // send tweet.place.bounding_box.coordinates to map
+//           socket.emit('tweet', {coordinates: tweet.place.bounding_box.coordinates});
+//         };
+//       }
+//       else{
+//         // send tweet.coordinates.coordinates to map
+//         socket.emit('tweet', {coordinates: tweet.coordinates.coordinates});
+//       };
+//     });
+//   });
+// };
 
 // streamData("car");

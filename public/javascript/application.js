@@ -62,3 +62,41 @@
 
 
 // })
+function makeMarker(lat, lng, map){
+  var marker = new google.maps.Marker({
+    position: { lat: lng, lng: lat },
+    map: map
+  })
+}
+
+function findBoxCenter(box){
+  point1 = box[0]
+  point2 = box[1]
+  point3 = box[2]
+  midX = (point1[1] + point2[1]) / 2
+  midY = (point1[0] + point3[0]) / 2
+  // makeMarker(midX, midY, map)
+  return [midX, midY]
+}
+
+$(document).ready(function(){
+
+    var mapOptions = {
+      center: { lat: 20, lng: 85},
+      zoom: 6
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+
+    box = [[88.0944569,22.2694931],[88.0944569,22.9559184],[88.6100265,22.9559184],[88.6100265,22.2694931]]
+
+    mid = findBoxCenter(box);
+    makeMarker(mid[1], mid[0], map)
+
+})
+
+
+
+
+
