@@ -1,3 +1,11 @@
+var socket = io.connect('http://localhost:5000');
+socket.on('tweet', function(data){
+  console.log(data);
+});
+socket.emit('search', {word: 'cat'})
+
+
+
 // function makeMarker(lat, lng, map){
 //   var marker = new google.maps.Marker({
 //     position: { lat: lng, lng: lat },
