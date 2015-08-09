@@ -55,7 +55,6 @@ var client = new twitter({
 //   client.stream('statuses/filter', {track: searchTerm}, function(stream){
 //     stream.on('data', function(tweet) {
 //       console.log("Text: " + tweet.text);
-
 //       if (tweet.coordinates === null || tweet.coordinates === undefined) {
 //         if (tweet.place === null){
 //           // parse tweet.user.location using CSV matching
