@@ -5,17 +5,11 @@ body {
   background-color: #001A5B;
   color: #CBD7A2;
   margin-bottom: 20px;
+  height: 100%;
+  width: 100%;
 }
-
 main {
   flex: 1 0 auto;
-}
-.sample-map {
-  min-height: 90%;
-  max-height: 90%;
-  max-width: 100%;
-  overflow: hidden;
-  position: relative;
 }
 
 /*NAVBAR, FOOTER*/
@@ -26,6 +20,9 @@ main {
   font-family: 'Shadows Into Light', cursive;
   letter-spacing: 8px;
   font-weight: bold;
+}
+.brand-logo center {
+  clear: right;
 }
 .momo {
   max-width: 100%;
@@ -38,6 +35,9 @@ main {
 footer.page-footer {
   margin-top: -10px;
   padding-top: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 footer.page-footer, a {
   color: #EB7600;
@@ -63,13 +63,23 @@ label.active {
   display: none;
 }
 li {
-  margin: 4% 20% 0 -100%;
+  margin: 4% 10% 0 -100%;
   width: 150%;
   height: 0px;
 }
 
 /*MAP*/
 #map-canvas {
-  width: 700px;
-  height: 700px;
+  height: 800px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
+/*.sample-map {
+  min-height: 90%;
+  max-height: 90%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}*/
+
