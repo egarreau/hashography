@@ -1,21 +1,32 @@
 var socket = io.connect('http://localhost:5000');
 var geocoder = new google.maps.Geocoder();
 
-function makeMarker(coordinateArray, map){
+function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map
   })
-}
+
+  var content = tweet;
+
+  var infowindow = new google.maps.InfoWindow()
+
+  google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+          return function() {
+             infowindow.setContent(content);
+             infowindow.open(map,marker);
+          };
+      })(marker,content,infowindow));
+};
 
 
-var geocoding = function(address, map) {
+var geocoding = function(address, map, tweet) {
     geocoder.geocode({"address": address}, function(results, status){
       if (status == google.maps.GeocoderStatus.OK){
         var location = results[0].geometry.location
         var lat = location.G
         var lng = location.K
-        makeMarker([lat, lng], map);
+        makeMarker([lat, lng], map, tweet);
       }
       else {
         // console.log("Geocode was not successful for the following reason: "+ status)
@@ -36,7 +47,7 @@ $(document).ready(function(){
         mapOptions);
 
     socket.on('tweet', function(data){
-      makeMarker(data.coordinates, map);
+      makeMarker(data.coordinates, map, data.tweet);
     });
 
     $("#search-form").on('submit', function(event){
@@ -55,7 +66,7 @@ $(document).ready(function(){
         // console.log("Blank string")
       }
       else {
-      setTimeout(geocoding(address, map), 500);
+      setTimeout(geocoding(address, map, data.tweet), 500);
       };
     });
 
