@@ -14,18 +14,6 @@
       <p>Welcome to hashography</p>
     </div>
 
-    <div>
-      <script src="/socket.io/socket.io.js"></script>
-      <script>
-        var socket = io.connect('http://localhost:5000');
-        socket.on('tweet', function(data){
-          console.log(data);
-        });
-        socket.emit('search', {word: 'cat'})
-      </script>
-    </div>
-
-
     <div id="map-canvas"></div>
   </main>
 
