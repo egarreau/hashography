@@ -40,18 +40,23 @@ io.on('connection', function(socket){
   socket.on('search', function(data){
     client.stream('statuses/filter', {track: data.word}, function(stream){
       stream.on('data', function(tweet) {
-
-        if (tweet.coordinates === null || tweet.coordinates === undefined) {
-          if (tweet.place === null){
-            socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text });
+        console.log("###########################")
+        console.dir(tweet)
+        console.log("coordinates: " + tweet.coordinates)
+        console.log("place: " + tweet.place)
+        if (tweet.limit === undefined){
+          if (tweet.coordinates === null) {
+            if (tweet.place === null){
+              socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text });
+            }
+            else{
+              midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
+              socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text });
+            };
           }
           else{
-            midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-            socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text });
+            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text });
           };
-        }
-        else{
-          socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text });
         };
       });
     });
