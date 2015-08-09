@@ -2,27 +2,73 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: #001A5B;
+  color: #CBD7A2;
+  margin-bottom: 20px;
 }
 
 main {
   flex: 1 0 auto;
 }
-
-/*NAVBAR*/
-.nav-wrapper {
-  background-color: #001A5B;
+.sample-map {
+  min-height: 90%;
+  max-height: 90%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-a.brand-logo.center {
+/*NAVBAR, FOOTER*/
+.nav-wrapper, a.brand-logo.center {
+  color: #448C64;
+  background-color: #001A5B;
+  font-size: 150%;
+  font-family: 'Shadows Into Light', cursive;
+  letter-spacing: 8px;
+  font-weight: bold;
+}
+.momo {
+  max-width: 100%;
+  max-height: 100%;
+  padding-left: 3%;
+}
+.pipe {
   color: #CBD7A2;
 }
-
-/*FOOTER*/
 footer.page-footer {
+  margin-top: -10px;
+  padding-top: 20px;
+}
+footer.page-footer, a {
+  color: #EB7600;
   background-color: #001A5B;
-  color: #CBD7A2;
 }
 
+/*TEXTAREA*/
+#textarea1 {
+  font-size: 20px;
+  padding: 5px;
+  font-family: Roboto;
+  color: #EB7600;
+}
+::-webkit-input-placeholder {
+   color: #EB7600;
+}
+label {
+  font-family: Roboto;
+  margin-left: 20px;
+  letter-spacing: 1px;
+}
+label.active {
+  display: none;
+}
+li {
+  margin: 4% 20% 0 -100%;
+  width: 150%;
+  height: 0px;
+}
+
+/*MAP*/
 #map-canvas {
   width: 700px;
   height: 700px;
