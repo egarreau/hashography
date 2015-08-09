@@ -13,7 +13,6 @@
 //   consumer_key: 'ncjKabjKKdcmnKkTyA0irhjIG',
 //   consumer_secret: '63XT0n4AdCcad3v3g37fHwelbbekHERNFVgC5GJm7HWQJoXvg4',
 //   access_token_key: '127879897-dSW0TRtfjE0eWYHyf0VHtH6UDNDFRCX1G8afJETN',
-//   access_token_secret: 'Rej1phiRJzAi62ah6c2hrSPmlTQczzhY2ctwoP1ckmMfh'
 // });
 
 
@@ -62,9 +61,9 @@
 
 
 // })
-function makeMarker(lat, lng, map){
+function makeMarker(lng, lat, map){
   var marker = new google.maps.Marker({
-    position: { lat: lng, lng: lat },
+    position: { lat: lat, lng: lng },
     map: map
   })
 }
