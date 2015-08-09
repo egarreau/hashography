@@ -6,7 +6,7 @@ $(document).ready(function(){
     var address = data.location
     if (address === "")
     {
-      console.log("Blank string")
+      // console.log("Blank string")
     }
     else {
     setTimeout(geocoding(address), 500);
@@ -21,9 +21,9 @@ $(document).ready(function(){
         var lng = location.K
         makeMarker([lat, lng], map);
       }
-      else {
-        console.log("Geocode was not successful for the following reason: "+ status)
-      }
+      // else {
+      //   console.log("Geocode was not successful for the following reason: "+ status)
+      // }
     })
   };
 });
