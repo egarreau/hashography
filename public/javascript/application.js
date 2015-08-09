@@ -1,4 +1,7 @@
-var socket = io.connect(window.location.hostname);
+var socket = io.connect(window.location.hostname, {
+  'reconnection': false
+});
+
 var geocoder = new google.maps.Geocoder();
 
 function makeMarker(coordinateArray, map, tweet){
