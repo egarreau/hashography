@@ -28,8 +28,8 @@ var geocoding = function(address, map) {
 $(document).ready(function(){
 
     var mapOptions = {
-      center: { lat: 20, lng: 85},
-      zoom: 6
+      center: { lat: 20, lng: 0},
+      zoom: 3
     };
 
     var map = new google.maps.Map(document.getElementById('map-canvas'),
