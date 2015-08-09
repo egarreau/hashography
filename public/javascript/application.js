@@ -39,13 +39,14 @@ $(document).ready(function(){
       makeMarker(data.coordinates, map);
     });
 
-    socket.emit('search', {word: 'cat'})
-
-
-    $(".input-field").on('submit', function(event){
+    $("#search-form").on('submit', function(event){
       event.preventDefault();
-      debugger;
+      var searchWord = $('#textarea1').val();
+      socket.emit('search', { word: searchWord });
+      $('#textarea1').val('');
     })
+
+    // socket.emit('search', {word: 'cat'})
 
     socket.on('geocoder', function(data){
       var address = data.location
