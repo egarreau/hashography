@@ -23,6 +23,11 @@ $(document).ready(function(){
 
     socket.emit('search', {word: 'cat'})
 
+    $(".input-field").on('submit', function(event){
+      event.preventDefault();
+      debugger;
+    })
+
 })
 
 
