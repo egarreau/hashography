@@ -20,14 +20,20 @@ function makeMarker(coordinateArray, map, tweet){
 
 //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
 
+//Hovering feature code was from Stack Overflow. See http://stackoverflow.com/questions/8920738/google-maps-v3-marker-info-window-on-mouseover
+
   var content = tweet;
   var infowindow = new google.maps.InfoWindow();
-  google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+  google.maps.event.addListener(marker,'mouseover', (function(marker,content,infowindow){
     return function() {
       infowindow.setContent(content);
       infowindow.open(map,marker);
     };
   })(marker,content,infowindow));
+
+  google.maps.addListener(marker, 'mouseout', function(){
+    infowindow.close();
+  });
 };
 
 
