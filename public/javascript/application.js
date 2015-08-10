@@ -31,7 +31,7 @@ function makeMarker(coordinateArray, map, tweet){
     };
   })(marker,content,infowindow));
 
-  google.maps.addListener(marker, 'mouseout', function(){
+  google.maps.event.addListener(marker, 'mouseout', function(){
     infowindow.close();
   });
 };
