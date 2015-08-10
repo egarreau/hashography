@@ -1,6 +1,9 @@
-var socket = io.connect(window.location.hostname, {
-  'reconnection': false
-});
+// var socket = io.connect(window.location.host);
+var socket = io.connect('http://localhost:5000');
+
+console.log(window.location.host);
+  // 'reconnection': false
+
 
 var geocoder = new google.maps.Geocoder();
 

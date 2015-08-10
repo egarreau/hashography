@@ -39,11 +39,17 @@ function findBoxCenter(box){
 io.on('connection', function(socket){
   socket.on('search', function(data){
     client.stream('statuses/filter', {track: data.word}, function(stream){
+      socket.on('disconnect', function(){
+        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH")
+        stream.destroy()
+      })
+      stream.on('error', function(error){
+        console.log(error)
+      })
       stream.on('data', function(tweet) {
-        console.log("###########################")
-        console.dir(tweet)
-        console.log("coordinates: " + tweet.coordinates)
-        console.log("place: " + tweet.place)
+        // console.log("###########################")
+        // console.log("coordinates: " + tweet.coordinates)
+        // console.log("place: " + tweet.place)
         if (tweet.limit === undefined){
           if (tweet.coordinates === null) {
             if (tweet.place === null){
