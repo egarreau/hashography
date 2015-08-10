@@ -11,6 +11,8 @@ Visualize where in the world a word or phrase is being used on Twitter, in realt
 
 ## Team Norms
 
+[Trello Board](https://trello.com/b/5RKxgcpV/hashography)
+
 ### Group Standups
 - Weekdays: 8:30am, 1:15pm, 5pm
 - Weekends: 10am, 1:30pm, 5pm
@@ -28,12 +30,12 @@ Visualize where in the world a word or phrase is being used on Twitter, in realt
 - Pull from master
 - Resolve all merge conflicts
 
-## Pull request checklist
+### Pull request checklist
 - Descriptive, specific title
 - Expand description of changes in comments as necessary
 - Include a screenshot of any changed views
 
-## Merge checklist
+### Merge checklist
 - At least two other team members must review the PR before it is merged
 - Reviewers should add comments as necessary
 - Notify team of merge
