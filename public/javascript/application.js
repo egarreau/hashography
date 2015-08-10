@@ -19,7 +19,6 @@ function makeMarker(coordinateArray, map, tweet){
       })(marker,content,infowindow));
 };
 
-
 var geocoding = function(address, map, tweet) {
     geocoder.geocode({"address": address}, function(results, status){
       if (status == google.maps.GeocoderStatus.OK){
@@ -33,8 +32,6 @@ var geocoding = function(address, map, tweet) {
       }
     })
   };
-
-
 
 $(document).ready(function(){
     $("#textarea1").focus();
