@@ -44,7 +44,8 @@ io.on('connection', function(socket){
         stream.destroy()
       })
       stream.on('error', function(error){
-        console.log(error)
+        socket.emit('openModal');
+        console.log(error);
       })
       stream.on('data', function(tweet) {
         // console.log("###########################")
