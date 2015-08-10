@@ -28,24 +28,31 @@ var client = new twitter({
 
 
 function findBoxCenter(box){
-  point1 = box[0]
-  point2 = box[1]
-  point3 = box[2]
-  midX = (point1[1] + point2[1]) / 2
-  midY = (point1[0] + point3[0]) / 2
-  return [midX, midY]
+  point1 = box[0];
+  point2 = box[1];
+  point3 = box[2];
+  midX = (point1[1] + point2[1]) / 2;
+  midY = (point1[0] + point3[0]) / 2;
+  return [midX, midY];
 }
 
 io.on('connection', function(socket){
   socket.on('search', function(data){
+    //stream.destroy()
     client.stream('statuses/filter', {track: data.word}, function(stream){
       socket.on('disconnect', function(){
-        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH")
-        stream.destroy()
+        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
+        stream.destroy();
       })
+
+      socket.on('newSearch', function(){
+        console.log("stream is closin...");
+        stream.destroy();
+      });
+
       stream.on('error', function(error){
-        socket.emit('openModal');
         console.log(error);
+        socket.emit('openModal');
       })
       stream.on('data', function(tweet) {
         // console.log("###########################")

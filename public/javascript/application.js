@@ -2,23 +2,43 @@ var socket = io.connect(window.location.host);
 
 var geocoder = new google.maps.Geocoder();
 
+var markers = [];
 function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
-    map: map
-  })
-
+    map: map,
+    animation: google.maps.Animation.DROP,
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 4,
+        fillOpacity: 0,
+        strokeColor: '#00b0ff'
+      }
+  });
+  markers.push(marker);
 //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
   var content = tweet;
-  var infowindow = new google.maps.InfoWindow()
+  var infowindow = new google.maps.InfoWindow();
   google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
-          return function() {
-             infowindow.setContent(content);
-             infowindow.open(map,marker);
-          };
-      })(marker,content,infowindow));
+    return function() {
+      infowindow.setContent(content);
+      infowindow.open(map,marker);
+    };
+  })(marker,content,infowindow));
 };
 
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
+}
 
 var geocoding = function(address, map, tweet) {
     geocoder.geocode({"address": address}, function(results, status){
@@ -34,7 +54,60 @@ var geocoding = function(address, map, tweet) {
     })
   };
 
-
+var styles = [
+  {
+    "featureType": "landscape",
+    "stylers": [
+      { "saturation": -100 },
+      { "visibility": "on" },
+      { "lightness": 4 },
+      { "gamma": 1.31 }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "saturation": -100 },
+      { "visibility": "on" },
+      { "gamma": 0.12 }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "on" },
+      { "saturation": -100 },
+      { "lightness": 100 }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "labels",
+    "stylers": [
+      { "color": "#858080" },
+      { "saturation": -100 },
+      { "weight": 0.2 },
+      { "visibility": "simplified" },
+      { "lightness": -9 }
+    ]
+  },{
+    "featureType": "administrative.province",
+    "stylers": [
+      { "weight": 0.1 },
+      { "lightness": 67 },
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      { "saturation": -100 },
+      { "lightness": 39 },
+      { "visibility": "on" },
+      { "weight": 0.9 }
+    ]
+  },{
+  }
+]
 
 $(document).ready(function(){
     $("#textarea1").focus();
@@ -46,6 +119,7 @@ $(document).ready(function(){
 
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
+    map.setOptions({styles: styles});
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet);
@@ -54,11 +128,11 @@ $(document).ready(function(){
     $("#search-form").on('submit', function(event){
       event.preventDefault();
       var searchWord = $('#textarea1').val();
+    // clear the map
+      clearMarkers();
+      socket.emit('newSearch');
       socket.emit('search', { word: searchWord });
-      $('#textarea1').val('');
     })
-
-    // socket.emit('search', {word: 'cat'})
 
     socket.on('geocoder', function(data){
       var address = data.location
@@ -71,7 +145,7 @@ $(document).ready(function(){
       };
     });
 
-    socket.on('openModal', function(){
+    socket.on('openModal', function(data){
         $('#modal1').openModal();
     });
 
