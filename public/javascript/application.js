@@ -37,6 +37,7 @@ var geocoding = function(address, map, tweet) {
 
 
 $(document).ready(function(){
+    $("#textarea1").focus();
     // socket.emit('reset')
     var mapOptions = {
       center: { lat: 20, lng: 0},
@@ -68,6 +69,10 @@ $(document).ready(function(){
       else {
       setTimeout(geocoding(address, map, data.tweet), 500);
       };
+    });
+
+    socket.on('openModal', function(){
+        $('#modal1').openModal();
     });
 
 
