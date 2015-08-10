@@ -6,8 +6,15 @@ function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map,
-    animation: google.maps.Animation.DROP
-  })
+    animation: google.maps.Animation.DROP,
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 4,
+        fillOpacity: 0,
+        strokeColor: '#00b0ff'
+      }
+  });
+
 
 //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
   var content = tweet;
