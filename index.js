@@ -26,16 +26,16 @@ var client = new twitter({
   consumer_secret: process.env.CONSUMER_SECRET,
   access_token_key: process.env.ACCESS_TOKEN_KEY,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
-});
+});x
 
 
 function findBoxCenter(box){
-  point1 = box[0]
-  point2 = box[1]
-  point3 = box[2]
-  midX = (point1[1] + point2[1]) / 2
-  midY = (point1[0] + point3[0]) / 2
-  return [midX, midY]
+  point1 = box[0];
+  point2 = box[1];
+  point3 = box[2];
+  midX = (point1[1] + point2[1]) / 2;
+  midY = (point1[0] + point3[0]) / 2;
+  return [midX, midY];
 }
 
 // function doomsday(oembed_url) {
@@ -66,14 +66,21 @@ var OEMBED_LINK = "https://api.twitter.com/1.1/statuses/oembed.json"
 
 io.on('connection', function(socket){
   socket.on('search', function(data){
+    //stream.destroy()
     client.stream('statuses/filter', {track: data.word}, function(stream){
       socket.on('disconnect', function(){
-        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH")
-        stream.destroy()
+        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
+        stream.destroy();
       })
+
+      socket.on('newSearch', function(){
+        console.log("stream is closin...");
+        stream.destroy();
+      });
+
       stream.on('error', function(error){
-        socket.emit('openModal');
         console.log(error);
+        socket.emit('openModal');
       })
       stream.on('data', function(tweet) {
         // var oembed_url = "https://api.twitter.com/1.1/statuses/oembed.json?id="+tweet.id_str

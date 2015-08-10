@@ -84,7 +84,7 @@ li {
 }
 
 /*ERROR MODAL*/
-#modal1, .btn-flat {
+#modal1, .btn-flat, ul {
   color: #001A5B;
 }
 
