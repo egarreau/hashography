@@ -2,17 +2,20 @@ var socket = io.connect(window.location.host);
 
 var geocoder = new google.maps.Geocoder();
 
+var markers = [];
 function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map
-  })
-//The following code was written by "Engineer", from StackOverflow. In June 19th 2012,
-//"Engineer" decided to make a post to help people like me use Google Map API to help
-//us display multiple infoboxes. Thank you Engineer!
+  });
+
+  markers.push(marker);
+  //The following code was written by "Engineer", from StackOverflow. In June 19th 2012,
+  //"Engineer" decided to make a post to help people like me use Google Map API to help
+  //us display multiple infoboxes. Thank you Engineer!
   var content = tweet;
 
-  var infowindow = new google.maps.InfoWindow()
+  var infowindow = new google.maps.InfoWindow();
 
   google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
           return function() {
@@ -22,6 +25,18 @@ function makeMarker(coordinateArray, map, tweet){
       })(marker,content,infowindow));
 };
 
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
+}
 
 var geocoding = function(address, map, tweet) {
     geocoder.geocode({"address": address}, function(results, status){
@@ -57,11 +72,11 @@ $(document).ready(function(){
     $("#search-form").on('submit', function(event){
       event.preventDefault();
       var searchWord = $('#textarea1').val();
+    // clear the map
+      clearMarkers();
+      socket.emit('newSearch');
       socket.emit('search', { word: searchWord });
-      $('#textarea1').val('');
     })
-
-    // socket.emit('search', {word: 'cat'})
 
     socket.on('geocoder', function(data){
       var address = data.location
@@ -74,7 +89,7 @@ $(document).ready(function(){
       };
     });
 
-    socket.on('openModal', function(){
+    socket.on('openModal', function(data){
         $('#modal1').openModal();
     });
 
