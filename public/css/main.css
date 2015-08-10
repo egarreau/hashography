@@ -82,3 +82,9 @@ li {
   overflow: hidden;
   position: relative;
 }*/
+
+/*ERROR MODAL*/
+#modal1, .btn-flat {
+  color: #001A5B;
+}
+
