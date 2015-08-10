@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var https = require('https');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var twitter = require('twitter');
@@ -36,6 +37,8 @@ function findBoxCenter(box){
   return [midX, midY]
 }
 
+var OEMBED_LINK = "https://api.twitter.com/1.1/statuses/oembed.json"
+
 io.on('connection', function(socket){
   socket.on('search', function(data){
     client.stream('statuses/filter', {track: data.word}, function(stream){
@@ -47,6 +50,9 @@ io.on('connection', function(socket){
         console.log(error)
       })
       stream.on('data', function(tweet) {
+        https.request("https://api.twitter.com/1.1/statuses/oembed.json?id="+tweet.id_str, function(response){
+          console.log(response);
+        });
         // console.log("###########################")
         // console.log("coordinates: " + tweet.coordinates)
         // console.log("place: " + tweet.place)
