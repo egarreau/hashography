@@ -54,9 +54,6 @@ function findBoxCenter(box){
 //     }
 //   });
 // }
-
-
-
   // console.log(https)
   // https.request("https://google.com", function(response){
   //   console.log(response)
