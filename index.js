@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var https = require('https');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var twitter = require('twitter');
@@ -37,6 +36,23 @@ function findBoxCenter(box){
   return [midX, midY]
 }
 
+function doomsday(oembed_url) {
+  console.log("Greetings streamers!")
+  http.request("https://google.com", function(response){
+    console.log(response)
+  });
+}
+
+
+
+  // console.log(https)
+  // https.request("https://google.com", function(response){
+  //   console.log(response)
+    // console.log("Status:"+ response.statusCode);
+    // console.log("Headers:"+JSON.stringify(response.headers));
+    // response.on("data", function(chunk){
+    //   console.log("Body: "+chunk);
+
 var OEMBED_LINK = "https://api.twitter.com/1.1/statuses/oembed.json"
 
 io.on('connection', function(socket){
@@ -51,9 +67,8 @@ io.on('connection', function(socket){
         console.log(error);
       })
       stream.on('data', function(tweet) {
-        https.request("https://api.twitter.com/1.1/statuses/oembed.json?id="+tweet.id_str, function(response){
-          console.log(response);
-        });
+        var oembed_url = "https://api.twitter.com/1.1/statuses/oembed.json?id="+tweet.id_str
+        doomsday(oembed_url)
         // console.log("###########################")
         // console.log("coordinates: " + tweet.coordinates)
         // console.log("place: " + tweet.place)
