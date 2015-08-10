@@ -5,8 +5,16 @@ var geocoder = new google.maps.Geocoder();
 function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
-    map: map
-  })
+    map: map,
+    animation: google.maps.Animation.DROP,
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 4,
+        fillOpacity: 0,
+        strokeColor: '#00b0ff'
+      }
+  });
+
 
 //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
   var content = tweet;
@@ -33,6 +41,62 @@ var geocoding = function(address, map, tweet) {
     })
   };
 
+var styles = [
+  {
+    "featureType": "landscape",
+    "stylers": [
+      { "saturation": -100 },
+      { "visibility": "on" },
+      { "lightness": 4 },
+      { "gamma": 1.31 }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "saturation": -100 },
+      { "visibility": "on" },
+      { "gamma": 0.12 }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "on" },
+      { "saturation": -100 },
+      { "lightness": 100 }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "labels",
+    "stylers": [
+      { "color": "#858080" },
+      { "saturation": -100 },
+      { "weight": 0.2 },
+      { "visibility": "simplified" },
+      { "lightness": -9 }
+    ]
+  },{
+    "featureType": "administrative.province",
+    "stylers": [
+      { "weight": 0.1 },
+      { "lightness": 67 },
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      { "saturation": -100 },
+      { "lightness": 39 },
+      { "visibility": "on" },
+      { "weight": 0.9 }
+    ]
+  },{
+  }
+]
+
+
 $(document).ready(function(){
     $("#textarea1").focus();
     // socket.emit('reset')
@@ -43,6 +107,7 @@ $(document).ready(function(){
 
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
+    map.setOptions({styles: styles});
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet);
