@@ -12,15 +12,13 @@ function makeMarker(coordinateArray, map, tweet){
         scale: 4,
         fillOpacity: 0,
         strokeColor: '#00b0ff'
-      },
+      }
   });
-//The following code was written by "Engineer", from StackOverflow. In June 19th 2012,
-//"Engineer" decided to make a post to help people like me use Google Map API to help
-//us display multiple infoboxes. Thank you Engineer!
+
+
+//The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
   var content = tweet;
-
   var infowindow = new google.maps.InfoWindow()
-
   google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
           return function() {
              infowindow.setContent(content);
