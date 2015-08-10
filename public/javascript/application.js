@@ -6,8 +6,14 @@ function makeMarker(coordinateArray, map, tweet){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map,
-    animation: google.maps.Animation.DROP
-  })
+    animation: google.maps.Animation.DROP,
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 4,
+        fillOpacity: 0,
+        strokeColor: '#00b0ff'
+      },
+  });
 //The following code was written by "Engineer", from StackOverflow. In June 19th 2012,
 //"Engineer" decided to make a post to help people like me use Google Map API to help
 //us display multiple infoboxes. Thank you Engineer!
