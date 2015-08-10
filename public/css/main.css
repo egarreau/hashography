@@ -2,7 +2,6 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #001A5B;
   color: #CBD7A2;
   margin-bottom: 20px;
   height: 100%;
@@ -14,12 +13,11 @@ main {
 
 /*NAVBAR, FOOTER*/
 .nav-wrapper {
-  background-color: #001A5B;
+  /*background-color: #001A5B;*/
 }
 
 
 .brand-logo {
-  color: #448C64;
   font-size: 150%;
   font-family: 'Shadows Into Light', cursive;
   letter-spacing: 8px;
@@ -45,20 +43,22 @@ footer.page-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  margin-right: 0px;
 }
+
 footer.page-footer, a {
-  color: #EB7600;
+  color: #bf360c;
   background-color: transparent;
+  padding: 5px;
 }
 
 /*TEXTAREA*/
 #textarea1 {
   font-size: 20px;
   padding: 5px;
-  color: #EB7600;
 }
 ::-webkit-input-placeholder {
-   color: #EB7600;
+   color: white;
 }
 label {
   font-family: Roboto;
@@ -72,6 +72,7 @@ li {
   margin: 4% 10% 0 -100%;
   width: 150%;
   height: 0px;
+  clear: right;
 }
 
 /*MAP*/
@@ -81,13 +82,6 @@ li {
   margin: 0;
   padding: 0;
 }
-/*.sample-map {
-  min-height: 90%;
-  max-height: 90%;
-  max-width: 100%;
-  overflow: hidden;
-  position: relative;
-}*/
 
 /*ERROR MODAL*/
 #modal1, .btn-flat {
