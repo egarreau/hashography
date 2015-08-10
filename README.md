@@ -11,6 +11,8 @@ Visualize where in the world a word or phrase is being used on Twitter, in realt
 
 ## Team Norms
 
+[Trello Board](https://trello.com/b/5RKxgcpV/hashography)
+
 ### Group Standups
 - Weekdays: 8:30am, 1:15pm, 5pm
 - Weekends: 10am, 1:30pm, 5pm
