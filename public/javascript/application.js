@@ -12,11 +12,14 @@ function makeMarker(coordinateArray, map, tweet){
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
         fillOpacity: 0,
-        strokeColor: '#00b0ff'
+        strokeColor: '#00b0ff',
+        strokeWeight: 2
       }
   });
   markers.push(marker);
+
 //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
+
   var content = tweet;
   var infowindow = new google.maps.InfoWindow();
   google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
