@@ -32,7 +32,6 @@ function makeMarker(coordinateArray, map, tweet){
   });
 };
 
-
 // Sets the map on all markers in the array.
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
@@ -113,6 +112,7 @@ var styles = [
   },{
   }
 ]
+
 
 $(document).ready(function(){
     $("#textarea1").focus();
