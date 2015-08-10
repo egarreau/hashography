@@ -13,20 +13,27 @@ main {
 }
 
 /*NAVBAR, FOOTER*/
-.nav-wrapper, a.brand-logo.center {
-  color: #448C64;
+.nav-wrapper {
   background-color: #001A5B;
+}
+
+
+.brand-logo {
+  color: #448C64;
   font-size: 150%;
   font-family: 'Shadows Into Light', cursive;
   letter-spacing: 8px;
   font-weight: bold;
+  margin-left: 1%;
 }
-.brand-logo center {
+
+.brand-logo {
   clear: right;
 }
 .momo {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 80%;
+  max-height: 80%;
+  padding-top: 1%;
   padding-left: 3%;
 }
 .pipe {
@@ -41,14 +48,13 @@ footer.page-footer {
 }
 footer.page-footer, a {
   color: #EB7600;
-  background-color: #001A5B;
+  background-color: transparent;
 }
 
 /*TEXTAREA*/
 #textarea1 {
   font-size: 20px;
   padding: 5px;
-  font-family: Roboto;
   color: #EB7600;
 }
 ::-webkit-input-placeholder {
