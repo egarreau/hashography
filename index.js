@@ -47,7 +47,8 @@ io.on('connection', function(socket){
         stream.destroy()
       })
       stream.on('error', function(error){
-        console.log(error)
+        socket.emit('openModal');
+        console.log(error);
       })
       stream.on('data', function(tweet) {
         https.request("https://api.twitter.com/1.1/statuses/oembed.json?id="+tweet.id_str, function(response){
