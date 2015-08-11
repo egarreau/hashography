@@ -14,10 +14,10 @@ function makeMarker(coordinateArray, map, tweet){
       }
   });
   markers.push(marker);
-  setMarkerProperties(tweet, marker);
+  setMarkerTweetProperties(tweet, marker, map);
 };
 
-function setMarkerProperties(tweet, marker){
+function setMarkerTweetProperties(tweet, marker, map){
   //The following code was written by "Engineer" on Stack Overflow on June 19th 2012. http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
 //Hovering feature code was from Stack Overflow. See http://stackoverflow.com/questions/8920738/google-maps-v3-marker-info-window-on-mouseover
   var content = tweet;
@@ -33,3 +33,31 @@ function setMarkerProperties(tweet, marker){
     infowindow.close();
   });
 }
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
+}
+
+
+function geocoding(address, map, tweet) {
+  geocoder.geocode({"address": address}, function(results, status){
+    if (status == google.maps.GeocoderStatus.OK){
+      //take first set of coordinates returned.
+      var location = results[0].geometry.location
+      var lat = location.G
+      var lng = location.K
+      makeMarker([lat, lng], map, tweet);
+    }
+    else {
+      // console.log("Geocode was not successful for the following reason: "+ status)
+    }
+  })
+};
