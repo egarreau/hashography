@@ -46,7 +46,6 @@ function clearMarkers() {
   setAllMap(null);
 }
 
-
 function geocoding(address, map, tweet) {
   geocoder.geocode({"address": address}, function(results, status){
     if (status == google.maps.GeocoderStatus.OK){
@@ -66,11 +65,9 @@ function initializeMap(){
   var mapOptions = {
       center: { lat: 20, lng: 0},
       zoom: 3
-    };
-
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    map.setOptions({styles: styles});
-
-    return map; //to make map available for use in application.
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  map.setOptions({styles: styles});
+  return map; //to make map available for use in application.
 }

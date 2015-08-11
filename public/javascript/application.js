@@ -1,8 +1,3 @@
-
-
-
-
-
 $(document).ready(function(){
     $("#textarea1").focus();
     // socket.emit('reset')
@@ -36,8 +31,6 @@ $(document).ready(function(){
     socket.on('openModal', function(data){
         $('#modal1').openModal();
     });
-
-
 })
 
 
