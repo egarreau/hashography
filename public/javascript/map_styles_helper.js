@@ -1,4 +1,5 @@
-var styles = [
+(function() {
+  this.styles = [
   {
     "featureType": "landscape",
     "stylers": [
@@ -50,4 +51,5 @@ var styles = [
     ]
   },{
   }
-]
+];
+}).call(this);
