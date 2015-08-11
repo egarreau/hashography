@@ -6,14 +6,8 @@
 $(document).ready(function(){
     $("#textarea1").focus();
     // socket.emit('reset')
-    var mapOptions = {
-      center: { lat: 20, lng: 0},
-      zoom: 3
-    };
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    map.setOptions({styles: styles});
+    var map = initializeMap();
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet);

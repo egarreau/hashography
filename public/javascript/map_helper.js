@@ -61,3 +61,16 @@ function geocoding(address, map, tweet) {
     }
   })
 };
+
+function initializeMap(){
+  var mapOptions = {
+      center: { lat: 20, lng: 0},
+      zoom: 3
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+    map.setOptions({styles: styles});
+
+    return map; //to make map available for use in application.
+}
