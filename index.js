@@ -65,8 +65,12 @@ io.on('connection', function(socket){
       });
 
       stream.on('error', function(error){
-        console.log(error);
-        socket.emit('openModal');
+        if(error instanceof TypeError) {
+          console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.")
+          console.trace(error);
+        } else {
+          socket.emit('openModal');
+        }
       })
       stream.on('data', function(tweet) {
         var attitude = (sediment.analyze(tweet.text).score);
