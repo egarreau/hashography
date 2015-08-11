@@ -52,8 +52,8 @@ function colorizeAttitude(attitude){
 
 io.on('connection', function(socket){
   socket.on('search', function(data){
-
     client.stream('statuses/filter', {track: data.word}, function(stream){
+      var words = str.split(data.word);
       socket.on('disconnect', function(){
         console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
         stream.destroy();
