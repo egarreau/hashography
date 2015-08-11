@@ -6,11 +6,13 @@ $(document).ready(function(){
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet, data.color);
+      toast.destroy()
     });
 
     $("#search-form").on('submit', function(event){
       event.preventDefault();
       var searchWord = $('#textarea1').val();
+
     // clear the map
       clearMarkers();
       socket.emit('newSearch');
