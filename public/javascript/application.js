@@ -24,7 +24,9 @@ $(document).ready(function(){
         // console.log("Blank string")
       }
       else {
-      setTimeout(geocoding(address, map, data.tweet), 500);
+        geocoding(address, function(latLng) {
+          makeMarker(latLng, map, data.tweet);
+        });
       };
     });
 
