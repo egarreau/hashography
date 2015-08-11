@@ -40,13 +40,13 @@ function findBoxCenter(box){
 function colorizeAttitude(attitude){
   if (attitude >= 0.5)
   {
-    return 'green'
+    return '#62ceff' //light blue
   }
   else if (attitude <= -0.5){
-    return 'red'
+    return '#007ab1' //dark blue
   }
   else {
-    return '#00b0ff'
+    return '#00a2eb' //normal blue
   }
 }
 
