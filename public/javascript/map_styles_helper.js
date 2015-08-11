@@ -11,9 +11,8 @@ var styles = [
     "featureType": "water",
     "elementType": "geometry",
     "stylers": [
-      { "saturation": -100 },
       { "visibility": "on" },
-      { "gamma": 0.12 }
+      { "color": "#424242" }
     ]
   },{
     "featureType": "administrative.country",
