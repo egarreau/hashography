@@ -56,6 +56,7 @@ io.on('connection', function(socket){
       })
       stream.on('data', function(tweet) {
         // console.log("###########################")
+        // console.dir(tweet)
         // console.log("coordinates: " + tweet.coordinates)
         // console.log("place: " + tweet.place)
         if (tweet.limit === undefined){
