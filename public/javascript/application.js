@@ -4,33 +4,22 @@ $(document).ready(function(){
 
   var map = initializeMap();
 
-  socket.on('tweet', function(data){
-    makeMarker(data.coordinates, map, data.tweet);
-  });
+  // socket.on('tweet', function(data){
+  //   makeMarker(data.coordinates, map, data.tweet);
+  // });
+  var sockett = new Socket();
+  sockett.makeMarkerFromTweet(map);
 
   $("#search-form").on('submit', function(event){
     event.preventDefault();
     var searchWord = $('#textarea1').val();
     // clear the map
     clearMarkers();
-    socket.emit('newSearch');
-    socket.emit('search', { word: searchWord });
+    sockett.performNewSearch(searchWord);
   });
 
-  socket.on('geocoder', function(data){
-    var address = data.location
-    if (address === "")
-    {
-      // console.log("Blank sbnghc vvvtring")
-    }
-    else {
-    setTimeout(geocoding(address, map, data.tweet), 500);
-    };
-  });
-
-  socket.on('openModal', function(data){
-      $('#modal1').openModal();
-  });
+  sockett.listenForGeocode(map);
+  sockett.listenForError();
 })
 
 
