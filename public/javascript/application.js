@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var socket = io.connect(window.location.host);
 
 var geocoder = new google.maps.Geocoder();
@@ -126,10 +127,13 @@ $(document).ready(function(){
       zoom: 3,
       mapTypeControl: false
     };
+=======
+$(document).ready(function(){
+    $("#textarea1").focus();
+    // socket.emit('reset')
+>>>>>>> b2a5f071aaa28513f1c1c7205be05c5129272d35
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    map.setOptions({styles: styles});
+    var map = initializeMap();
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet);
@@ -160,8 +164,6 @@ $(document).ready(function(){
     socket.on('openModal', function(data){
         $('#modal1').openModal();
     });
-
-
 })
 
 
