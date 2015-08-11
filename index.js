@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var twitter = require('twitter');
+var sediment = require('sediment');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -36,6 +37,19 @@ function findBoxCenter(box){
   return [midX, midY];
 }
 
+function colorizeAttitude(attitude){
+  if (attitude >= 0.5)
+  {
+    return 'green'
+  }
+  else if (attitude <= -0.5){
+    return 'red'
+  }
+  else {
+    return '#00b0ff'
+  }
+}
+
 io.on('connection', function(socket){
   socket.on('search', function(data){
 
@@ -55,19 +69,21 @@ io.on('connection', function(socket){
         socket.emit('openModal');
       })
       stream.on('data', function(tweet) {
+        var attitude = (sediment.analyze(tweet.text).score);
+        var color = colorizeAttitude(attitude)
 
         if (tweet.limit === undefined){
           if (tweet.coordinates === null) {
             if (tweet.place === null){
-              socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text });
+              socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color });
             }
             else{
               midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-              socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text });
+              socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color });
             };
           }
           else{
-            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text });
+            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color });
           };
         };
       });

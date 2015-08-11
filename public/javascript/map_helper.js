@@ -2,7 +2,7 @@
   this.geocoder = new google.maps.Geocoder();
   this.markers = [];
 
-  function makeMarker(coordinateArray, map, tweet){
+  function makeMarker(coordinateArray, map, tweet, color){
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
@@ -11,7 +11,7 @@
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
         fillOpacity: 0,
-        strokeColor: '#00b0ff'
+        strokeColor: color
       }
     });
     markers.push(marker);
@@ -39,7 +39,8 @@
 
   this.setMarkerTweetProperties = setMarkerTweetProperties;
 
-  // Sets the map on all markers in the array.
+  // Sets the map on all markers in the array. This is necessary so that we can
+  //clear the map later by setting the map for each Marker as null.
   function setAllMap(map) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);

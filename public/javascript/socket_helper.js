@@ -5,7 +5,7 @@ function Socket(){
 
 Socket.prototype.makeMarkerFromTweet = function(map){
   this.socket.on('tweet', function(data){
-    makeMarker(data.coordinates, map, data.tweet);
+    makeMarker(data.coordinates, map, data.tweet, data.color);
   });
 }
 
@@ -18,9 +18,11 @@ Socket.prototype.listenForGeocode = function(map){
   this.socket.on('geocoder', function(data){
     var address = data.location
     if (address !== ""){
-      geocoding(address, function(latLng) {
-        makeMarker(latLng, map, data.tweet);
-      });
+      setTimeout(function(){
+        geocoding(address, function(latLng) {
+          makeMarker(latLng, map, data.tweet, data.color);
+        })
+      }, 500);
     }
   });
 }
