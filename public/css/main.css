@@ -1,19 +1,15 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  color: #CBD7A2;
-  margin-bottom: 20px;
-  height: 100%;
-  width: 100%;
-}
-main {
-  flex: 1 0 auto;
-}
+
 
 /*NAVBAR, FOOTER*/
 .nav-wrapper {
   /*background-color: #001A5B;*/
+}
+
+#wait-notification {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background-color: black;
 }
 
 
@@ -53,13 +49,10 @@ footer.page-footer, a {
 }
 
 /*TEXTAREA*/
-#textarea1 {
-  font-size: 20px;
-  padding: 5px;
-}
 ::-webkit-input-placeholder {
    color: white;
 }
+
 label {
   font-family: Roboto;
   margin-left: 20px;
@@ -79,12 +72,11 @@ li {
 #map-canvas {
   height: 800px;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  position: relative;
 }
 
 /*ERROR MODAL*/
-#modal1, .btn-flat, ul {
+#modal1, .btn-flat {
   color: #001A5B;
 }
 

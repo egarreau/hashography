@@ -123,7 +123,8 @@ $(document).ready(function(){
     // socket.emit('reset')
     var mapOptions = {
       center: { lat: 20, lng: 0},
-      zoom: 3
+      zoom: 3,
+      mapTypeControl: false
     };
 
     var map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -132,11 +133,13 @@ $(document).ready(function(){
 
     socket.on('tweet', function(data){
       makeMarker(data.coordinates, map, data.tweet);
+      toast.destroy()
     });
 
     $("#search-form").on('submit', function(event){
       event.preventDefault();
       var searchWord = $('#textarea1').val();
+
     // clear the map
       clearMarkers();
       socket.emit('newSearch');
