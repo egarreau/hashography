@@ -11,7 +11,8 @@
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
         fillOpacity: 0,
-        strokeColor: color
+        strokeColor: color,
+        strokeWeight: 2
       }
     });
     markers.push(marker);
