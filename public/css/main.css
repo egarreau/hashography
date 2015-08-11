@@ -19,6 +19,7 @@
   letter-spacing: 8px;
   font-weight: bold;
   margin-left: 1%;
+  background-color: transparent;
 }
 
 .brand-logo {
@@ -44,8 +45,8 @@ footer.page-footer {
 
 footer.page-footer, a {
   color: #bf360c;
-  background-color: transparent;
-  padding: 5px;
+  background-color: #424242;
+  padding: 2px;
 }
 
 /*TEXTAREA*/
