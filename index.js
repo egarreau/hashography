@@ -38,11 +38,11 @@ function findBoxCenter(box){
 }
 
 function colorizeAttitude(attitude){
-  if (attitude >= 1)
+  if (attitude >= 0.5)
   {
     return 'green'
   }
-  else if (attitude <= -1){
+  else if (attitude <= -0.5){
     return 'red'
   }
   else {
