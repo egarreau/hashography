@@ -1,7 +1,7 @@
 var geocoder = new google.maps.Geocoder();
 var markers = [];
 
-function makeMarker(coordinateArray, map, tweet){
+function makeMarker(coordinateArray, map, tweet, color){
   var marker = new google.maps.Marker({
     position: { lat: coordinateArray[0], lng: coordinateArray[1] },
     map: map,
@@ -10,7 +10,7 @@ function makeMarker(coordinateArray, map, tweet){
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
         fillOpacity: 0,
-        strokeColor: '#00b0ff'
+        strokeColor: color
       }
   });
   markers.push(marker);
@@ -46,14 +46,14 @@ function clearMarkers() {
   setAllMap(null);
 }
 
-function geocoding(address, map, tweet) {
+function geocoding(address, map, tweet, color) {
   geocoder.geocode({"address": address}, function(results, status){
     if (status == google.maps.GeocoderStatus.OK){
       //take first set of coordinates returned.
       var location = results[0].geometry.location
       var lat = location.G
       var lng = location.K
-      makeMarker([lat, lng], map, tweet);
+      makeMarker([lat, lng], map, tweet, color);
     }
     else {
       // console.log("Geocode was not successful for the following reason: "+ status)

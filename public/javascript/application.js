@@ -5,7 +5,7 @@ $(document).ready(function(){
     var map = initializeMap();
 
     socket.on('tweet', function(data){
-      makeMarker(data.coordinates, map, data.tweet);
+      makeMarker(data.coordinates, map, data.tweet, data.color);
     });
 
     $("#search-form").on('submit', function(event){
@@ -24,7 +24,7 @@ $(document).ready(function(){
         // console.log("Blank string")
       }
       else {
-      setTimeout(geocoding(address, map, data.tweet), 500);
+      setTimeout(geocoding(address, map, data.tweet, data.color), 500);
       };
     });
 
