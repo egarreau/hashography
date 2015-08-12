@@ -65,6 +65,10 @@ li {
   clear: right;
 }
 
+form{
+  margin-top: -7px;
+}
+
 input[placeholder]{
   font-family: Roboto;
   font-size: 20px;
@@ -79,6 +83,12 @@ input.input-field{
 input[type=text].input-field:focus{
   border-bottom: none;
   box-shadow: none;
+}
+
+/* TWITTER BUTTON */
+.fa {
+  float: right;
+  margin-right: 20px;
 }
 
 /*MAP*/
