@@ -2,14 +2,13 @@
   this.geocoder = new google.maps.Geocoder();
   this.markers = [];
 
-  function makeMarker(coordinateArray, map, tweet, color, url){
-    console.log(url)
+  function makeMarker(coordinateArray, map, tweet, color, user, id){
+
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
       animation: google.maps.Animation.DROP,
-      // url: "https://twitter.com/" + username + "/status/" + id,
-
+      url: "https://twitter.com/" + user + "/status/" + id,
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
