@@ -37,7 +37,7 @@ function findBoxCenter(box){
   return [midX, midY];
 }
 
-function colorizeAttitude(attitude){
+function colorizeBlueAttitude(attitude){
   if (attitude >= 0.5)
   {
     return '#62ceff' //light blue
@@ -50,10 +50,23 @@ function colorizeAttitude(attitude){
   }
 }
 
+function colorizeRedAttitude(attitude){
+  if (attitude >= 0.5)
+  {
+    return '#8B0000' //light red
+  }
+  else if (attitude <= -0.5){
+    return '#DB7093' //dark red
+  }
+  else {
+    return '#FF0000' //normal red
+  }
+}
+
 io.on('connection', function(socket){
   socket.on('search', function(data){
+    var words = data.word.split(",");
     client.stream('statuses/filter', {track: data.word}, function(stream){
-      var words = str.split(data.word);
       socket.on('disconnect', function(){
         console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
         stream.destroy();
@@ -69,13 +82,19 @@ io.on('connection', function(socket){
           console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.")
           console.trace(error);
         } else {
+          console.log(error);
           socket.emit('openModal');
         }
       })
+
       stream.on('data', function(tweet) {
         var attitude = (sediment.analyze(tweet.text).score);
-        var color = colorizeAttitude(attitude)
-
+        if (tweet.text.match(words[0])){
+          var color = colorizeBlueAttitude(attitude)
+        }
+        else {
+          var color = colorizeRedAttitude(attitude)
+        };
         if (tweet.limit === undefined){
           if (tweet.coordinates === null) {
             if (tweet.place === null){
@@ -91,6 +110,7 @@ io.on('connection', function(socket){
           };
         };
       });
+
     });
   });
 });
