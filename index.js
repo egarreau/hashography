@@ -109,6 +109,7 @@ io.on('connection', function(socket){
         var attitude = (sediment.analyze(tweet.text).score);
         if (words.length === 1) {
           var color = colorizeBlueAttitude(attitude);
+          sendTweets(socket, tweet, color);
         }
         else
         {
