@@ -36,23 +36,36 @@ body {
 
 /*Animation configurations ( duration and fill mode )*/
 .animated {
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
-/*Animation for webkit*/
+/*Animation for webkit Chrome, Safari, Opera */
 @-webkit-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
-  50% {-webkit-transform: translateY(-30px);}
-  50% {-webkit-transform: translateY(-15px);}
+  10% {-webkit-transform: translateY(-10px);}
+  20% {-webkit-transform: translateY(10px);}
+  30% {-webkit-transform: translateY(-10px);}
+  40% {-webkit-transform: translateY(10px);}
+  50% {-webkit-transform: translateY(-10px);}
+  60% {-webkit-transform: translateY(10px);}
+  70% {-webkit-transform: translateY(-10px);}
+  80% {-webkit-transform: translateY(10px);}
+  90% {-webkit-transform: translateY(-10px);}
 }
 
+/*Standard Animation */
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  50% {transform: translateY(-30px);}
-  50% {transform: translateY(-15px);}
+  10% {transform: translateY(-10px);}
+  20% {transform: translateY(10px);}
+  30% {transform: translateY(-10px);}
+  40% {transform: translateY(10px);}
+  50% {transform: translateY(-10px);}
+  60% {transform: translateY(10px);}
+  70% {transform: translateY(-10px);}
+  80% {transform: translateY(10px);}
+  90% {transform: translateY(-10px);}
 }
 
 /*Adding the animation to our element*/
@@ -60,7 +73,6 @@ body {
   -webkit-animation-name: bounce;
   animation-name: bounce;
 }
-
 
 .pipe {
   color: #ffffff;
@@ -86,7 +98,7 @@ footer.page-footer, a {
    color: white;
 }
 
-li {
+.search {
   margin: 4% 10% 0 -100%;
   width: 150%;
   height: 0px;

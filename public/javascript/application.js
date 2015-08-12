@@ -1,5 +1,8 @@
 $(document).ready(function(){
   $("#textarea1").focus();
+  $(".momo").on('click', function(){
+    $("#siteInstructions").openModal();
+  });
   Materialize.toast('Listening for tweets...');
   $(".toast").hide();
   var map = initializeMap();
