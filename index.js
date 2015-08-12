@@ -66,15 +66,15 @@ function colorizeRedAttitude(attitude){
 function sendTweets(socket, tweet, color){
   if (tweet.coordinates === null) {
     if (tweet.place === null){
-      socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
+      socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
     }
     else{
       midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-      socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
+      socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
     }
   }
   else{
-    socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
+    socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
   }
 }
 

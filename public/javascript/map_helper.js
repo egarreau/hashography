@@ -34,7 +34,8 @@
 
   function clickThroughToTweet(marker){
     google.maps.event.addListener(marker, 'click', function() {
-        window.location.href = marker.url;
+        // window.location.href = marker.url;
+        window.open(marker.url,'_blank')
     });
   }
   this.clickThroughToTweet = clickThroughToTweet;
