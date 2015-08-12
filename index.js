@@ -66,20 +66,21 @@ function colorizeRedAttitude(attitude){
 function sendTweets(socket, tweet, color){
   if (tweet.coordinates === null) {
     if (tweet.place === null){
-      socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color });
+      socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
     }
     else{
       midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-      socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color });
+      socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
     }
   }
   else{
-    socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color });
+    socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id_str });
   }
 }
 
 io.on('connection', function(socket){
   socket.on('search', function(data){
+    var receivedTweets = false;
     var words = data.word.split(",");
     client.stream('statuses/filter', {track: data.word}, function(stream){
       socket.on('disconnect', function(){
@@ -105,10 +106,14 @@ io.on('connection', function(socket){
       });
 
       stream.on('data', function(tweet) {
-        socket.emit('hideToast');
+        if (receivedTweets === false) {
+          socket.emit('hideToast');
+          receivedTweets = true;
+        };
         var attitude = (sediment.analyze(tweet.text).score);
         if (words.length === 1) {
           var color = colorizeBlueAttitude(attitude);
+          sendTweets(socket, tweet, color);
         }
         else
         {

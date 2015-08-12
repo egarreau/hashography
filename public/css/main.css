@@ -1,3 +1,6 @@
+body {
+  min-width: 1000px;
+}
 /*NAVBAR, FOOTER*/
 .nav-wrapper {
   background-color: #F3C300;

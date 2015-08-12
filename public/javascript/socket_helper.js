@@ -6,6 +6,7 @@ function Socket(){
 Socket.prototype.makeMarkerFromTweet = function(map){
   this.socket.on('tweet', function(data){
     // $(".toast").hide();
+
     makeMarker(data.coordinates, map, data.tweet, data.color, data.user, data.id);
   });
 }
@@ -21,7 +22,7 @@ Socket.prototype.listenForGeocode = function(map){
     if (address !== ""){
       setTimeout(function(){
         geocoding(address, function(latLng) {
-          makeMarker(latLng, map, data.tweet, data.color, data.user, data.id );
+          makeMarker(latLng, map, data.tweet, data.color, data.user, data.id);
         });
       }, 500);
     }
@@ -37,7 +38,6 @@ Socket.prototype.listenForError = function(){
 Socket.prototype.listenForFirstTweet = function(){
   console.log("listening...");
   this.socket.on('hideToast', function(){
-    console.log("i'm supposed to be hiding...");
     $(".toast").hide();
   });
 }

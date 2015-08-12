@@ -3,12 +3,11 @@
   this.markers = [];
 
   function makeMarker(coordinateArray, map, tweet, color, user, id){
-    console.log(user)
-    console.log(id)
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
       animation: google.maps.Animation.DROP,
+      url: "https://twitter.com/" + user + "/status/" + id,
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 4,
@@ -19,6 +18,7 @@
     });
     markers.push(marker);
     setMarkerTweetProperties(tweet, marker, map);
+    clickThroughToTweet(marker);
   };
   this.makeMarker = makeMarker;
 
@@ -30,6 +30,14 @@
     };
   }
   this.prepareTweetContent = prepareTweetContent;
+
+  function clickThroughToTweet(marker){
+    google.maps.event.addListener(marker, 'click', function() {
+        // window.location.href = marker.url;
+        window.open(marker.url,'_blank');
+    });
+  }
+  this.clickThroughToTweet = clickThroughToTweet;
 
   function setMarkerTweetProperties(tweet, marker, map){
     var content = tweet;
