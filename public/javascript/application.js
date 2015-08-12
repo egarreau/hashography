@@ -1,5 +1,7 @@
 $(document).ready(function(){
   $("#textarea1").focus();
+
+  // $(".target").effect( "bounce", {times:3}, 300 );
   $(".momo").on('mouseover', function(){
     $("#siteInstructions").openModal();
   });
@@ -23,6 +25,10 @@ $(document).ready(function(){
   socket.listenForError();
 });
 
+//acting weird
+// $(window).load(function() {
+//     $( ".momo" ).effect( "bounce", { times: 4, distance: 8 }, 4000 );
+// });
 
 
 

@@ -90,3 +90,23 @@ input[type=text].input-field:focus{
   color: #001A5B;
 }
 
+/*#momoTalk{
+  display:inline-block;
+  margin-left:20px;
+  height: 20px;
+}*/
+
+
+#momoTalk {
+  position: relative;
+
+height:10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  border: 2px solid black;
+  color: #333;
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
