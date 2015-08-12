@@ -81,6 +81,27 @@ function load_disconnect_function(socket, stream){
   });
 }
 
+function load_new_search_function(socket, stream) {
+  socket.on('newSearch', function(){
+    console.log("stream is closin...");
+    // socket.emit('hideToast');
+    stream.destroy();
+  });
+}
+
+function load_error_function(socket, stream) {
+  stream.on('error', function(error){
+    console.log(error);
+    if(error instanceof TypeError) {
+      console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
+      console.trace(error);
+    } else {
+      console.log(error);
+      socket.emit('openModal');
+    }
+  });
+}
+
 function load_search_function(socket){
   socket.on('search', function(data){
     var receivedTweets = false;
@@ -89,22 +110,9 @@ function load_search_function(socket){
 
       load_disconnect_function(socket, stream);
 
-      socket.on('newSearch', function(){
-        console.log("stream is closin...");
-        // socket.emit('hideToast');
-        stream.destroy();
-      });
+      load_new_search_function(socket, stream);
 
-      stream.on('error', function(error){
-        console.log(error);
-        if(error instanceof TypeError) {
-          console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
-          console.trace(error);
-        } else {
-          console.log(error);
-          socket.emit('openModal');
-        }
-      });
+      load_error_function(socket, stream)
 
       stream.on('data', function(tweet) {
         if (receivedTweets === false) {
