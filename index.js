@@ -44,20 +44,18 @@ function colorizeBlueAttitude(attitude){
     case (attitude <= -0.5):
       return '#007ab1'; //dark blue
     default:
-    return '#00a2eb'; //normal blue
+      return '#00a2eb'; //normal blue
   }
 }
 
 function colorizeRedAttitude(attitude){
-  if (attitude >= 0.5)
-  {
-    return '#8B0000'; //light red
-  }
-  else if (attitude <= -0.5){
-    return '#DB7093'; //dark red
-  }
-  else {
-    return '#FF0000'; //normal red
+  switch(true) {
+    case(attitude >= 0.5):
+      return '#8B0000'; //light red
+    case(attitude <= -0.5):
+      return '#DB7093'; //dark red
+    default:
+      return '#FF0000'; //normal red
   }
 }
 
@@ -76,15 +74,20 @@ function sendTweets(socket, tweet, color){
   }
 }
 
-io.on('connection', function(socket){
+function load_disconnect_function(socket, stream){
+  socket.on('disconnect', function(){
+    console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
+    stream.destroy();
+  });
+}
+
+function load_search_function(socket){
   socket.on('search', function(data){
     var receivedTweets = false;
     var words = data.word.split(",");
     client.stream('statuses/filter', {track: data.word}, function(stream){
-      socket.on('disconnect', function(){
-        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
-        stream.destroy();
-      });
+
+      load_disconnect_function(socket, stream);
 
       socket.on('newSearch', function(){
         console.log("stream is closin...");
@@ -133,4 +136,8 @@ io.on('connection', function(socket){
 
     });
   });
+}
+
+io.on('connection', function(socket){
+  load_search_function(socket)
 });
