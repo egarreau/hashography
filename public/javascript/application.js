@@ -7,13 +7,19 @@ $(document).ready(function(){
   socket.makeMarkerFromTweet(map);
   $("#search-form").on('submit', function(event){
     event.preventDefault();
-    $(".toast").show();
-    // var doTimer = function(){return 5000};
-    socket.listenForFirstTweet();
     var searchWord = $('#textarea1').val();
-    // clear the map
-    clearMarkers();
-    socket.performNewSearch(searchWord);
+    if (searchWord.match(/,.*,/)){
+      Materialize.toast('You can only search for one or two terms', 2000);
+    }
+    else
+    {
+      $(".toast").show();
+      // var doTimer = function(){return 5000};
+      socket.listenForFirstTweet();
+      // clear the map
+      clearMarkers();
+      socket.performNewSearch(searchWord);
+    }
   });
 
   socket.listenForGeocode(map);
