@@ -102,11 +102,43 @@ function load_error_function(socket, stream) {
   });
 }
 
+function load_data_function(socket, stream, words) {
+  var receivedTweets = false;
+
+  stream.on('data', function(tweet) {
+    if (receivedTweets === false) {
+      socket.emit('hideToast');
+      receivedTweets = true;
+    };
+    var attitude = (sediment.analyze(tweet.text).score);
+    if (words.length === 1) {
+      var color = colorizeBlueAttitude(attitude);
+      sendTweets(socket, tweet, color);
+    }
+    else
+    {
+      var firstWord = new RegExp(words[0],"i");
+      var secondWord = new RegExp(words[1], "i");
+      if (tweet.text.match(firstWord)){
+        var color = colorizeBlueAttitude(attitude);
+        sendTweets(socket, tweet, color);
+      }
+      else if (tweet.text.match(secondWord)) {
+        var color = colorizeRedAttitude(attitude);
+        sendTweets(socket, tweet, color);
+      }
+      else
+      {
+      }
+    }
+  });
+
+}
+
 function load_search_function(socket){
   socket.on('search', function(data){
-    var receivedTweets = false;
-    var words = data.word.split(",");
     client.stream('statuses/filter', {track: data.word}, function(stream){
+      var words = data.word.split(",");
 
       load_disconnect_function(socket, stream);
 
@@ -114,34 +146,7 @@ function load_search_function(socket){
 
       load_error_function(socket, stream)
 
-      stream.on('data', function(tweet) {
-        if (receivedTweets === false) {
-          socket.emit('hideToast');
-          receivedTweets = true;
-        };
-        var attitude = (sediment.analyze(tweet.text).score);
-        if (words.length === 1) {
-          var color = colorizeBlueAttitude(attitude);
-          sendTweets(socket, tweet, color);
-        }
-        else
-        {
-          var firstWord = new RegExp(words[0],"i");
-          var secondWord = new RegExp(words[1], "i");
-          if (tweet.text.match(firstWord)){
-            var color = colorizeBlueAttitude(attitude);
-            sendTweets(socket, tweet, color);
-          }
-          else if (tweet.text.match(secondWord)) {
-            var color = colorizeRedAttitude(attitude);
-            sendTweets(socket, tweet, color);
-          }
-          else
-          {
-          }
-        }
-      });
-
+      load_data_function(socket, stream, words)
     });
   });
 }
