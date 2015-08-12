@@ -1,18 +1,23 @@
 $(document).ready(function(){
   $("#textarea1").focus();
+  Materialize.toast('Listening for tweets...');
+  $(".toast").hide();
   var map = initializeMap();
-  var sockett = new Socket();
-  sockett.makeMarkerFromTweet(map);
+  var socket = new Socket();
+  socket.makeMarkerFromTweet(map);
   $("#search-form").on('submit', function(event){
     event.preventDefault();
+    $(".toast").show();
+    // var doTimer = function(){return 5000};
+    socket.listenForFirstTweet();
     var searchWord = $('#textarea1').val();
     // clear the map
     clearMarkers();
-    sockett.performNewSearch(searchWord);
+    socket.performNewSearch(searchWord);
   });
 
-  sockett.listenForGeocode(map);
-  sockett.listenForError();
+  socket.listenForGeocode(map);
+  socket.listenForError();
 });
 
 
