@@ -54,20 +54,37 @@ footer.page-footer, a {
    color: white;
 }
 
-label {
+/*label {
   font-family: Roboto;
   margin-left: 20px;
   letter-spacing: 1px;
 }
 label.active {
   display: none;
-}
+}*/
 li {
   margin: 4% 10% 0 -100%;
   width: 150%;
   height: 0px;
   clear: right;
 }
+
+input[placeholder]{
+  font-family: Roboto;
+  font-size: 20px;
+  margin-left: 20px;
+  letter-spacing: 1px;
+}
+
+input.input-field{
+  border-bottom: none;
+
+}
+input[type=text].input-field:focus{
+  border-bottom: none;
+  box-shadow: none;
+}
+
 
 /*MAP*/
 #map-canvas {
