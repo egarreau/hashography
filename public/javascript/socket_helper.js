@@ -37,7 +37,6 @@ Socket.prototype.listenForError = function(){
 Socket.prototype.listenForFirstTweet = function(){
   console.log("listening...");
   this.socket.on('hideToast', function(){
-    console.log("i'm supposed to be hiding...");
     $(".toast").hide();
   });
 }
