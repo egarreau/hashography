@@ -38,14 +38,12 @@ function findBoxCenter(box){
 }
 
 function colorizeBlueAttitude(attitude){
-  if (attitude >= 0.5)
-  {
-    return '#62ceff'; //light blue
-  }
-  else if (attitude <= -0.5){
-    return '#007ab1'; //dark blue
-  }
-  else {
+  switch(true) {
+    case (attitude >= 0.5):
+      return '#62ceff'; //light blue
+    case (attitude <= -0.5):
+      return '#007ab1'; //dark blue
+    default:
     return '#00a2eb'; //normal blue
   }
 }
