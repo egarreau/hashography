@@ -8,7 +8,7 @@ $(document).ready(function(){
   $("#search-form").on('submit', function(event){
     event.preventDefault();
     var searchWord = $('#textarea1').val();
-    if (searchWord.match(/,.+,/)){
+    if (searchWord.match(/,.*,/)){
       Materialize.toast('You can only search for one or two terms', 2000);
     }
     else
