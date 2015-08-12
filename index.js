@@ -107,27 +107,27 @@ io.on('connection', function(socket){
       stream.on('data', function(tweet) {
         socket.emit('hideToast');
         var attitude = (sediment.analyze(tweet.text).score);
-        var regexp = new RegExp(words[0],"i");
         if (words.length === 1) {
-          console.log("Colorizing Blue!");
           var color = colorizeBlueAttitude(attitude);
         }
         else
         {
-          if (tweet.text.match(regexp)){
-            console.log("Colorizing Blue!");
+          var firstWord = new RegExp(words[0],"i");
+          var secondWord = new RegExp(words[1], "i");
+          if (tweet.text.match(firstWord)){
             var color = colorizeBlueAttitude(attitude);
+            sendTweets(socket, tweet, color);
           }
-          else {
-            console.log("Colorizing Red!")
+          else if (tweet.text.match(secondWord)) {
             var color = colorizeRedAttitude(attitude);
+            sendTweets(socket, tweet, color);
+          }
+          else
+          {
           }
         }
-        sendTweets(socket, tweet, color);
       });
 
     });
   });
 });
-
-
