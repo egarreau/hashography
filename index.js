@@ -89,7 +89,7 @@ io.on('connection', function(socket){
             };
           }
           else{
-            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color });
+            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color, id: tweet.id, user: tweet.user.screen_name });
           };
         };
       });
