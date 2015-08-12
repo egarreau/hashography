@@ -81,15 +81,15 @@ io.on('connection', function(socket){
         if (tweet.limit === undefined){
           if (tweet.coordinates === null) {
             if (tweet.place === null){
-              socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color });
+              socket.emit('geocoder', { location: tweet.user.location, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
             }
             else{
               midPoint = findBoxCenter(tweet.place.bounding_box.coordinates[0]);
-              socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color });
+              socket.emit('tweet', {coordinates: midPoint, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
             };
           }
           else{
-            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color });
+            socket.emit('tweet', {coordinates: tweet.coordinates.coordinates, tweet: tweet.text, color: color, user: tweet.user.screen_name, id: tweet.id });
           };
         };
       });

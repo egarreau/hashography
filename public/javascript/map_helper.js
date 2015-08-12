@@ -2,7 +2,9 @@
   this.geocoder = new google.maps.Geocoder();
   this.markers = [];
 
-  function makeMarker(coordinateArray, map, tweet, color){
+  function makeMarker(coordinateArray, map, tweet, color, user, id){
+    console.log(user)
+    console.log(id)
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
