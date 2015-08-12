@@ -10,7 +10,6 @@ $(document).ready(function(){
     var searchWord = $('#textarea1').val();
     if (searchWord.match(/,.+,/)){
       Materialize.toast('You can only search for one or two terms', 2000);
-      clearMarkers();
     }
     else
     {
