@@ -89,10 +89,14 @@ io.on('connection', function(socket){
 
       stream.on('data', function(tweet) {
         var attitude = (sediment.analyze(tweet.text).score);
-        if (tweet.text.match(words[0])){
+        var regexp = new RegExp(words[0],"i")
+        console.log(regexp)
+        if (tweet.text.match(regexp)){
+          console.log("Colorizing Blue!")
           var color = colorizeBlueAttitude(attitude)
         }
         else {
+          console.log("Colorizing Red!")
           var color = colorizeRedAttitude(attitude)
         };
         if (tweet.limit === undefined){
