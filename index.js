@@ -61,10 +61,12 @@ io.on('connection', function(socket){
 
       socket.on('newSearch', function(){
         console.log("stream is closin...");
+        // socket.emit('hideToast');
         stream.destroy();
       });
 
       stream.on('error', function(error){
+        console.log(error);
         if(error instanceof TypeError) {
           console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.")
           console.trace(error);
@@ -73,9 +75,9 @@ io.on('connection', function(socket){
         }
       })
       stream.on('data', function(tweet) {
+        socket.emit('hideToast');
         var attitude = (sediment.analyze(tweet.text).score);
         var color = colorizeAttitude(attitude)
-
         if (tweet.limit === undefined){
           if (tweet.coordinates === null) {
             if (tweet.place === null){
