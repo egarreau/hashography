@@ -102,6 +102,22 @@ function load_error_function(socket, stream) {
   });
 }
 
+function load_dual_search_function(socket, tweet, words){
+  var firstWord = new RegExp(words[0],"i");
+  var secondWord = new RegExp(words[1], "i");
+  if (tweet.text.match(firstWord)){
+    var color = colorizeBlueAttitude(attitude);
+    sendTweets(socket, tweet, color);
+  }
+  else if (tweet.text.match(secondWord)) {
+    var color = colorizeRedAttitude(attitude);
+    sendTweets(socket, tweet, color);
+  }
+  else
+  {
+  }
+}
+
 function load_data_function(socket, stream, words) {
   var receivedTweets = false;
 
@@ -117,19 +133,7 @@ function load_data_function(socket, stream, words) {
     }
     else
     {
-      var firstWord = new RegExp(words[0],"i");
-      var secondWord = new RegExp(words[1], "i");
-      if (tweet.text.match(firstWord)){
-        var color = colorizeBlueAttitude(attitude);
-        sendTweets(socket, tweet, color);
-      }
-      else if (tweet.text.match(secondWord)) {
-        var color = colorizeRedAttitude(attitude);
-        sendTweets(socket, tweet, color);
-      }
-      else
-      {
-      }
+      load_dual_search_function(socket, tweet, words)
     }
   });
 
