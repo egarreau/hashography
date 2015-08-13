@@ -38,28 +38,24 @@ function findBoxCenter(box){
 }
 
 function colorizeBlueAttitude(attitude){
-  if (attitude >= 0.5)
-  {
-    return '#62ceff'; //light blue
-  }
-  else if (attitude <= -0.5){
-    return '#007ab1'; //dark blue
-  }
-  else {
-    return '#00a2eb'; //normal blue
+  switch(true) {
+    case (attitude >= 0.5):
+      return '#62ceff'; //light blue
+    case (attitude <= -0.5):
+      return '#007ab1'; //dark blue
+    default:
+      return '#00a2eb'; //normal blue
   }
 }
 
 function colorizeRedAttitude(attitude){
-  if (attitude >= 0.5)
-  {
-    return '#8B0000'; //light red
-  }
-  else if (attitude <= -0.5){
-    return '#DB7093'; //dark red
-  }
-  else {
-    return '#FF0000'; //normal red
+  switch(true) {
+    case(attitude >= 0.5):
+      return '#8B0000'; //light red
+    case(attitude <= -0.5):
+      return '#DB7093'; //dark red
+    default:
+      return '#FF0000'; //normal red
   }
 }
 
@@ -78,61 +74,91 @@ function sendTweets(socket, tweet, color){
   }
 }
 
-io.on('connection', function(socket){
+function load_disconnect_function(socket, stream){
+  socket.on('disconnect', function(){
+    console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
+    stream.destroy();
+  });
+}
+
+function load_new_search_function(socket, stream) {
+  socket.on('newSearch', function(){
+    console.log("stream is closin...");
+    // socket.emit('hideToast');
+    stream.destroy();
+  });
+}
+
+function load_error_function(socket, stream) {
+  stream.on('error', function(error){
+    console.log(error);
+    if(error instanceof TypeError) {
+      console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
+      console.trace(error);
+    } else {
+      console.log(error);
+      socket.emit('openModal');
+    }
+  });
+}
+
+function dual_search(socket, tweet, words, attitude){
+  var firstWord = new RegExp(words[0],"i");
+  var secondWord = new RegExp(words[1], "i");
+  if (tweet.text.match(firstWord)){
+    single_blue_search(socket, tweet, attitude);
+  }
+  else if (tweet.text.match(secondWord)) {
+    single_red_search(socket, tweet, attitude);
+  }
+}
+
+function single_blue_search(socket, tweet, attitude){
+  var color = colorizeBlueAttitude(attitude);
+  sendTweets(socket, tweet, color);
+}
+
+function single_red_search(socket, tweet, attitude){
+  var color = colorizeRedAttitude(attitude);
+  sendTweets(socket, tweet, color);
+}
+
+function load_data_function(socket, stream, words) {
+  var receivedTweets = false;
+
+  stream.on('data', function(tweet) {
+    if (receivedTweets === false) {
+      socket.emit('hideToast');
+      receivedTweets = true;
+    };
+    var attitude = (sediment.analyze(tweet.text).score);
+    if (words.length === 1) {
+      single_blue_search(socket, tweet, attitude)
+    }
+    else
+    {
+      dual_search(socket, tweet, words, attitude)
+    }
+  });
+
+}
+
+function load_search_function(socket){
   socket.on('search', function(data){
-    var receivedTweets = false;
-    var words = data.word.split(",");
     client.stream('statuses/filter', {track: data.word}, function(stream){
-      socket.on('disconnect', function(){
-        console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
-        stream.destroy();
-      });
+      var words = data.word.split(",");
 
-      socket.on('newSearch', function(){
-        console.log("stream is closin...");
-        // socket.emit('hideToast');
-        stream.destroy();
-      });
+      load_disconnect_function(socket, stream);
 
-      stream.on('error', function(error){
-        console.log(error);
-        if(error instanceof TypeError) {
-          console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
-          console.trace(error);
-        } else {
-          console.log(error);
-          socket.emit('openModal');
-        }
-      });
+      load_new_search_function(socket, stream);
 
-      stream.on('data', function(tweet) {
-        if (receivedTweets === false) {
-          socket.emit('hideToast');
-          receivedTweets = true;
-        };
-        var attitude = (sediment.analyze(tweet.text).score);
-        if (words.length === 1) {
-          var color = colorizeBlueAttitude(attitude);
-          sendTweets(socket, tweet, color);
-        }
-        else
-        {
-          var firstWord = new RegExp(words[0],"i");
-          var secondWord = new RegExp(words[1], "i");
-          if (tweet.text.match(firstWord)){
-            var color = colorizeBlueAttitude(attitude);
-            sendTweets(socket, tweet, color);
-          }
-          else if (tweet.text.match(secondWord)) {
-            var color = colorizeRedAttitude(attitude);
-            sendTweets(socket, tweet, color);
-          }
-          else
-          {
-          }
-        }
-      });
+      load_error_function(socket, stream)
 
+      load_data_function(socket, stream, words)
     });
   });
+}
+
+io.on('connection', function(socket){
+  load_search_function(socket)
 });
