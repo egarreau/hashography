@@ -102,20 +102,25 @@ function load_error_function(socket, stream) {
   });
 }
 
-function load_dual_search_function(socket, tweet, words){
+function dual_search(socket, tweet, words, attitude){
   var firstWord = new RegExp(words[0],"i");
   var secondWord = new RegExp(words[1], "i");
   if (tweet.text.match(firstWord)){
-    var color = colorizeBlueAttitude(attitude);
-    sendTweets(socket, tweet, color);
+    single_blue_search(socket, tweet, attitude);
   }
   else if (tweet.text.match(secondWord)) {
-    var color = colorizeRedAttitude(attitude);
-    sendTweets(socket, tweet, color);
+    single_red_search(socket, tweet, attitude);
   }
-  else
-  {
-  }
+}
+
+function single_blue_search(socket, tweet, attitude){
+  var color = colorizeBlueAttitude(attitude);
+  sendTweets(socket, tweet, color);
+}
+
+function single_red_search(socket, tweet, attitude){
+  var color = colorizeRedAttitude(attitude);
+  sendTweets(socket, tweet, color);
 }
 
 function load_data_function(socket, stream, words) {
@@ -128,12 +133,11 @@ function load_data_function(socket, stream, words) {
     };
     var attitude = (sediment.analyze(tweet.text).score);
     if (words.length === 1) {
-      var color = colorizeBlueAttitude(attitude);
-      sendTweets(socket, tweet, color);
+      single_blue_search(socket, tweet, attitude)
     }
     else
     {
-      load_dual_search_function(socket, tweet, words)
+      dual_search(socket, tweet, words, attitude)
     }
   });
 
