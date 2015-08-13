@@ -51,7 +51,7 @@ function colorizeBlueAttitude(attitude){
 function colorizeRedAttitude(attitude){
   switch(true) {
     case(attitude >= 0.5):
-      return '#FF7F00'; //light red
+      return '#F3C300'; //yellow
     case(attitude <= -0.5):
       return '#bf360c'; //dark red
     default:
