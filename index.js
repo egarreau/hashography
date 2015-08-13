@@ -42,7 +42,7 @@ function colorizeBlueAttitude(attitude){
     case (attitude >= 0.5):
       return '#98cbff'; //light blue
     case (attitude <= -0.5):
-      return '#003060'; //dark blue
+      return '#2400D6'; //dark blue
     default:
       return '#007FFF'; //normal blue
   }
@@ -51,11 +51,11 @@ function colorizeBlueAttitude(attitude){
 function colorizeOrangeAttitude(attitude){
   switch(true) {
     case(attitude >= 0.5):
-      return '#F3C300'; //yellow
+      return '#FFAD66'; //light orange
     case(attitude <= -0.5):
-      return '#bf360c'; //orange
+      return '#B54500'; //dark orange
     default:
-      return '#FF7E00'; //dark orange
+      return '#FF7E00'; //orange
   }
 }
 
