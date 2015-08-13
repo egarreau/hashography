@@ -40,22 +40,22 @@ function findBoxCenter(box){
 function colorizeBlueAttitude(attitude){
   switch(true) {
     case (attitude >= 0.5):
-      return '#62ceff'; //light blue
+      return '#98cbff'; //light blue
     case (attitude <= -0.5):
-      return '#007ab1'; //dark blue
+      return '#003060'; //dark blue
     default:
-      return '#00a2eb'; //normal blue
+      return '#007FFF'; //normal blue
   }
 }
 
 function colorizeRedAttitude(attitude){
   switch(true) {
     case(attitude >= 0.5):
-      return '#8B0000'; //light red
+      return '#FF7F00'; //light red
     case(attitude <= -0.5):
-      return '#DB7093'; //dark red
+      return '#bf360c'; //dark red
     default:
-      return '#FF0000'; //normal red
+      return '#FF7E00'; //normal red
   }
 }
 
