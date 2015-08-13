@@ -8,9 +8,13 @@ $(document).ready(function(){
   var map = initializeMap();
   var socket = new Socket();
   socket.makeMarkerFromTweet(map);
+  var searchWord;
   $("#search-form").on('submit', function(event){
     event.preventDefault();
-    var searchWord = $('#textarea1').val();
+    searchWord = $('#textarea1').val();
+
+    $("#twitter-button").attr("href", 'http://twitter.com/home?status=I%27m%20tracking%20"'+searchWord+'"%20on%20Hashography!%20hashography.herokuapp.com');
+
     if (searchWord.match(/,.*,/)){
       Materialize.toast('You can only search for one or two terms', 2000);
     }
@@ -24,6 +28,10 @@ $(document).ready(function(){
       socket.performNewSearch(searchWord);
     }
   });
+
+  // $("#twitter-button").on('click', function(){
+  //   console.log(searchWord);
+  // });
 
   socket.listenForGeocode(map);
   socket.listenForError();
