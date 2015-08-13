@@ -40,22 +40,22 @@ function findBoxCenter(box){
 function colorizeBlueAttitude(attitude){
   switch(true) {
     case (attitude >= 0.5):
-      return '#62ceff'; //light blue
+      return '#98cbff'; //light blue
     case (attitude <= -0.5):
-      return '#007ab1'; //dark blue
+      return '#2400D6'; //dark blue
     default:
-      return '#00a2eb'; //normal blue
+      return '#007FFF'; //normal blue
   }
 }
 
-function colorizeRedAttitude(attitude){
+function colorizeOrangeAttitude(attitude){
   switch(true) {
     case(attitude >= 0.5):
-      return '#8B0000'; //light red
+      return '#FFAD66'; //light orange
     case(attitude <= -0.5):
-      return '#DB7093'; //dark red
+      return '#B54500'; //dark orange
     default:
-      return '#FF0000'; //normal red
+      return '#FF7E00'; //orange
   }
 }
 
@@ -109,7 +109,7 @@ function dual_search(socket, tweet, words, attitude){
     single_blue_search(socket, tweet, attitude);
   }
   else if (tweet.text.match(secondWord)) {
-    single_red_search(socket, tweet, attitude);
+    single_orange_search(socket, tweet, attitude);
   }
 }
 
@@ -118,8 +118,8 @@ function single_blue_search(socket, tweet, attitude){
   sendTweets(socket, tweet, color);
 }
 
-function single_red_search(socket, tweet, attitude){
-  var color = colorizeRedAttitude(attitude);
+function single_orange_search(socket, tweet, attitude){
+  var color = colorizeOrangeAttitude(attitude);
   sendTweets(socket, tweet, color);
 }
 
