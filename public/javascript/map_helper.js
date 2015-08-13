@@ -3,6 +3,7 @@
   this.markers = [];
 
   function makeMarker(coordinateArray, map, tweet, color, user, id){
+
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
@@ -32,7 +33,8 @@
   this.prepareTweetContent = prepareTweetContent;
 
   function clickThroughToTweet(marker){
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'click', function(event) {
+        event.preventDefault();
         // window.location.href = marker.url;
         window.open(marker.url,'_blank');
     });
