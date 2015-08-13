@@ -53,9 +53,9 @@ function colorizeRedAttitude(attitude){
     case(attitude >= 0.5):
       return '#F3C300'; //yellow
     case(attitude <= -0.5):
-      return '#bf360c'; //dark red
+      return '#bf360c'; //orange
     default:
-      return '#FF7E00'; //normal red
+      return '#FF7E00'; //dark orange
   }
 }
 
