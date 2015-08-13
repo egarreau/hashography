@@ -6,7 +6,8 @@ function Socket(){
 Socket.prototype.makeMarkerFromTweet = function(map){
   this.socket.on('tweet', function(data){
     // $(".toast").hide();
-    makeMarker(data.coordinates, map, data.tweet, data.color, data.url, data.user, data.id);
+
+    makeMarker(data.coordinates, map, data.tweet, data.color, data.user, data.id);
   });
 }
 

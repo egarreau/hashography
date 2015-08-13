@@ -33,7 +33,8 @@
   this.prepareTweetContent = prepareTweetContent;
 
   function clickThroughToTweet(marker){
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'click', function(event) {
+        event.preventDefault();
         // window.location.href = marker.url;
         window.open(marker.url,'_blank');
     });
