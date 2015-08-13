@@ -48,7 +48,7 @@ function colorizeBlueAttitude(attitude){
   }
 }
 
-function colorizeRedAttitude(attitude){
+function colorizeOrangeAttitude(attitude){
   switch(true) {
     case(attitude >= 0.5):
       return '#F3C300'; //yellow
@@ -109,7 +109,7 @@ function dual_search(socket, tweet, words, attitude){
     single_blue_search(socket, tweet, attitude);
   }
   else if (tweet.text.match(secondWord)) {
-    single_red_search(socket, tweet, attitude);
+    single_orange_search(socket, tweet, attitude);
   }
 }
 
@@ -118,8 +118,8 @@ function single_blue_search(socket, tweet, attitude){
   sendTweets(socket, tweet, color);
 }
 
-function single_red_search(socket, tweet, attitude){
-  var color = colorizeRedAttitude(attitude);
+function single_orange_search(socket, tweet, attitude){
+  var color = colorizeOrangeAttitude(attitude);
   sendTweets(socket, tweet, color);
 }
 
