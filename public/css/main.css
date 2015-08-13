@@ -1,7 +1,5 @@
-body {
-  min-width: 1000px;
-}
-/*NAVBAR, FOOTER*/
+/*NAVBAR*/
+
 .nav-wrapper {
   background-color: #F3C300;
 }
@@ -20,21 +18,16 @@ body {
   font-weight: bold;
   margin-left: 1%;
   background-color: transparent;
-}
-
-.brand-logo {
   clear: right;
 }
 
 .momo {
   max-width: 90%;
   max-height: 90%;
-  padding-top: 0.5%;
-  padding-left: 3%;
-  padding-bottom: 0.25%;
+  padding: 0.5% 0 0.25% 3%;
 }
 
-/*Animation configurations ( duration and fill mode )*/
+/*Animation configurations (duration and fill mode)*/
 .animated {
   -webkit-animation-duration: 10s;
   animation-duration: 10s;
@@ -55,7 +48,7 @@ body {
   90% {-webkit-transform: translateY(-10px);}
 }
 
-/*Standard Animation */
+/*Standard animation*/
 @keyframes bounce {
   10% {transform: translateY(-10px);}
   20% {transform: translateY(10px);}
@@ -68,32 +61,15 @@ body {
   90% {transform: translateY(-10px);}
 }
 
-/*Adding the animation to our element*/
+/*Add animation to element*/
 .bounce {
   -webkit-animation-name: bounce;
   animation-name: bounce;
 }
 
-.pipe {
-  color: #ffffff;
-}
 
-footer.page-footer {
-  margin-top: -10px;
-  padding-top: 20px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  margin-right: 0px;
-}
+/*SEARCH AREA*/
 
-footer.page-footer, a {
-  color: #F3C300;
-  background-color: #424242;
-  padding: 2px;
-}
-
-/*TEXTAREA*/
 ::-webkit-input-placeholder {
    color: white;
 }
@@ -105,41 +81,66 @@ footer.page-footer, a {
   clear: right;
 }
 
-form{
+#search-form {
   margin-top: -7px;
 }
 
-input[placeholder]{
-  font-family: Roboto;
+input[placeholder] {
   font-size: 20px;
   margin-left: 20px;
   letter-spacing: 1px;
 }
 
-input.input-field{
+input.input-field {
   border-bottom: none;
 }
 
-input[type=text].input-field:focus{
+input[type=text].input-field:focus {
   border-bottom: none;
   box-shadow: none;
 }
 
+
 /* TWITTER BUTTON */
+
 .fa {
   float: right;
   margin-right: 20px;
 }
 
+
 /*MAP*/
+
 #map-canvas {
   height: 800px;
   width: 100%;
   position: relative;
 }
 
-/*ERROR MODAL*/
-#modal1, .btn-flat {
-  color: #001A5B;
+
+/*MODALS*/
+
+#modal1, .btn-flat, #siteInstructions {
+  color: #424242;
 }
 
+
+/*FOOTER*/
+
+.pipe {
+  color: #ffffff;
+}
+
+footer.page-footer {
+  margin: -10px 0 0 0;
+  padding-top: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer.page-footer, a {
+  color: #F3C300;
+  background-color: #424242;
+  padding: 2px;
+}
