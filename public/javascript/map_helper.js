@@ -3,7 +3,6 @@
   this.markers = [];
 
   function makeMarker(coordinateArray, map, tweet, color, user, id){
-
     var marker = new google.maps.Marker({
       position: { lat: coordinateArray[0], lng: coordinateArray[1] },
       map: map,
@@ -71,13 +70,12 @@
       if (status == google.maps.GeocoderStatus.OK){
         //take first set of coordinates returned.
         var location = results[0].geometry.location
-        var lat = location.G
-        var lng = location.K
+        var lat = location.lat()
+        var lng = location.lng()
         callback([lat, lng]);
       }
     });
   };
-
   this.geocoding = geocoding;
 
   function initializeMap(){

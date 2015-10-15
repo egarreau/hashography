@@ -76,14 +76,14 @@ function sendTweets(socket, tweet, color){
 
 function load_disconnect_function(socket, stream){
   socket.on('disconnect', function(){
-    console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
+    // console.log("DESTROYED MWAHAHAHAHHAHHAHAHAHAH");
     stream.destroy();
   });
 }
 
 function load_new_search_function(socket, stream) {
   socket.on('newSearch', function(){
-    console.log("stream is closin...");
+    // console.log("stream is closin...");
     // socket.emit('hideToast');
     stream.destroy();
   });
@@ -91,12 +91,12 @@ function load_new_search_function(socket, stream) {
 
 function load_error_function(socket, stream) {
   stream.on('error', function(error){
-    console.log(error);
+    // console.log(error);
     if(error instanceof TypeError) {
-      console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
-      console.trace(error);
+      // console.error("SWALLOWING THE FOLLOWING ERROR! YOLO.");
+      // console.trace(error);
     } else {
-      console.log(error);
+      // console.log(error);
       socket.emit('openModal');
     }
   });

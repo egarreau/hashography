@@ -6,7 +6,7 @@ function Socket(){
 Socket.prototype.makeMarkerFromTweet = function(map){
   this.socket.on('tweet', function(data){
     // $(".toast").hide();
-    makeMarker(data.coordinates, map, data.tweet, data.color, data.url, data.user, data.id);
+    makeMarker(data.coordinates, map, data.tweet, data.color,data.user, data.id);
   });
 }
 
@@ -18,7 +18,7 @@ Socket.prototype.performNewSearch = function(searchWord){
 Socket.prototype.listenForGeocode = function(map){
   this.socket.on('geocoder', function(data){
     var address = data.location
-    if (address !== ""){
+    if (address !== null){
       setTimeout(function(){
         geocoding(address, function(latLng) {
           makeMarker(latLng, map, data.tweet, data.color, data.user, data.id);
